@@ -10,11 +10,11 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [playerInfo, setPlayerInfo] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(90);
+  const [timeLeft, setTimeLeft] = useState(90); 
   const [quizEnded, setQuizEnded] = useState(false);
   const [message, setMessage] = useState('');
-  const [hintCount, setHintCount] = useState(2);
-  const [filteredOptions, setFilteredOptions] = useState(null);
+  const [hintCount, setHintCount] = useState(2); 
+  const [filteredOptions, setFilteredOptions] = useState(null); 
   const [optionColorsMap, setOptionColorsMap] = useState([]);
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const Quiz = () => {
     if (playerInfo) {
       const fetchQuestions = async () => {
         try {
-          const response = await fetch('/src/data/questions.json');
+          const response = await fetch('/data/questions.json');
           if (!response.ok) {
             throw new Error('Failed to fetch questions');
           }
@@ -129,6 +129,7 @@ const Quiz = () => {
       score: score || 0,
       timeUsed: 90 - timeLeft,
     };
+
 
     await saveResult(result); // Save the result in IndexedDB
 

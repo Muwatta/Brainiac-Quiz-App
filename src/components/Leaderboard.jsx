@@ -7,10 +7,10 @@ const Leaderboard = ({ refreshTrigger }) => {
   const [loadingError, setLoadingError] = useState(false);
 
   useEffect(() => {
+
     const fetchLeaderboard = async () => {
       try {
         const results = await getTopResults();
-
         const validResults = results.filter(
           player =>
             player.score !== undefined &&
