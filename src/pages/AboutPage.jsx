@@ -1,0 +1,12 @@
+import React from 'react';
+import About from '../components/About';
+
+const AboutPage = () => {
+  return (
+    <div className="p-6 bg-white shadow-md rounded-lg">
+      <About />
+    </div>
+  );
+};
+
+export default AboutPage;

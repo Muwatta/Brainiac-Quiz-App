@@ -1,0 +1,642 @@
+[
+  {
+    "subject": "Maths",
+    "questions": [
+      {
+        "question": "What is the value of π (pi) to two decimal places?",
+        "options": ["3.12", "3.14", "3.16", "3.18"],
+        "answer": "3.14"
+      },
+      {
+        "question": "What is the square of 7?",
+        "options": ["32", "49", "59", "4.79"],
+        "answer": "49"
+      },
+      {
+        "question": "What is the square root of 144?",
+        "options": ["10", "11", "12", "13"],
+        "answer": "12"
+      },
+      {
+        "question": "What is 15 × 8?",
+        "options": ["115", "120", "125", "130"],
+        "answer": "120"
+      },
+      {
+        "question": "What is the value of 25²?",
+        "options": ["500", "600", "625", "700"],
+        "answer": "625"
+      },
+      {
+        "question": "What is the area of a rectangle with length 8 cm and width 5 cm?",
+        "options": ["40 cm²", "30 cm²", "50 cm²", "45 cm²"],
+        "answer": "40 cm²"
+      },
+      {
+        "question": "What is the perimeter of a square with side length 6 cm?",
+        "options": ["24 cm", "30 cm", "36 cm", "48 cm"],
+        "answer": "24 cm"
+      },
+      {
+        "question": "What is the value of 7! (7 factorial)?",
+        "options": ["5040", "3600", "5000", "7000"],
+        "answer": "5040"
+      },
+      {
+        "question": "What is the slope of a line passing through (2, 3) and (4, 7)?",
+        "options": ["2", "1", "4", "3"],
+        "answer": "2"
+      },
+      {
+        "question": "What is the volume of a cube with side length 3 cm?",
+        "options": ["9 cm³", "27 cm³", "18 cm³", "15 cm³"],
+        "answer": "27 cm³"
+      },
+      {
+        "question": "What is 50 ÷ 2?",
+        "options": ["20", "25", "30", "35"],
+        "answer": "25"
+      },
+      {
+        "question": "What is the result of 9 × 12?",
+        "options": ["108", "120", "115", "110"],
+        "answer": "108"
+      },
+      {
+        "question": "What is the formula for the area of a triangle?",
+        "options": [
+          "(Base × Height)/2",
+          "Base + Height",
+          "Base × Height",
+          "Base × Height × 2"
+        ],
+        "answer": "(Base × Height)/2"
+      },
+      {
+        "question": "What is the value of 100 ÷ 5?",
+        "options": ["15", "20", "25", "30"],
+        "answer": "20"
+      },
+      {
+        "question": "What is the result of 3 raised to the power of 4?",
+        "options": ["81", "54", "128", "32"],
+        "answer": "81"
+      },
+      {
+        "question": "What is the sum of the angles in a triangle?",
+        "options": ["180°", "360°", "90°", "270°"],
+        "answer": "180°"
+      },
+      {
+        "question": "What is 16 ÷ 4?",
+        "options": ["3", "4", "5", "6"],
+        "answer": "4"
+      },
+      {
+        "question": "What is the least common multiple (LCM) of 6 and 8?",
+        "options": ["48", "24", "18", "36"],
+        "answer": "24"
+      },
+      {
+        "question": "What is the greatest common divisor (GCD) of 12 and 15?",
+        "options": ["3", "6", "4", "5"],
+        "answer": "3"
+      }
+    ]
+  },
+  {
+    "subject": "English",
+    "questions": [
+      {
+        "question": "What is the synonym of 'Happy'?",
+        "options": ["Sad", "Joyful", "Angry", "Tired"],
+        "answer": "Joyful"
+      },
+      {
+        "question": "Which of these is a noun?",
+        "options": ["Run", "Beautiful", "Table", "Quickly"],
+        "answer": "Table"
+      },
+      {
+        "question": "Which word is an antonym of 'Fast'?",
+        "options": ["Quick", "Slow", "Rapid", "Steady"],
+        "answer": "Slow"
+      },
+      {
+        "question": "Which of these is a verb?",
+        "options": ["Book", "Quickly", "Run", "Beauty"],
+        "answer": "Run"
+      },
+      {
+        "question": "Which sentence is in the past tense?",
+        "options": [
+          "He eats the apple",
+          "He will eat the apple",
+          "He ate the apple",
+          "He is eating the apple"
+        ],
+        "answer": "He ate the apple"
+      },
+      {
+        "question": "Which of these is a preposition?",
+        "options": ["On", "Run", "Happy", "Table"],
+        "answer": "On"
+      },
+      {
+        "question": "Which of these is a pronoun?",
+        "options": ["She", "Quickly", "Red", "Swift"],
+        "answer": "She"
+      },
+      {
+        "question": "What is the plural form of 'Child'?",
+        "options": ["Children", "Childs", "Childes", "Childern"],
+        "answer": "Children"
+      },
+      {
+        "question": "Which of these sentences is grammatically correct?",
+        "options": [
+          "She go to school",
+          "She goes to school",
+          "She gone to school",
+          "She going to school"
+        ],
+        "answer": "She goes to school"
+      },
+      {
+        "question": "What is the opposite of 'Love'?",
+        "options": ["Hate", "Anger", "Jealousy", "Sadness"],
+        "answer": "Hate"
+      },
+      {
+        "question": "Which word is an adjective?",
+        "options": ["Run", "Happy", "Quickly", "Under"],
+        "answer": "Happy"
+      },
+      {
+        "question": "Which sentence uses a question mark?",
+        "options": [
+          "She is going to school",
+          "Where is the book?",
+          "I love this song",
+          "She loves reading"
+        ],
+        "answer": "Where is the book?"
+      },
+      {
+        "question": "Which of these is a conjunction?",
+        "options": ["And", "Beautiful", "Apple", "Jump"],
+        "answer": "And"
+      },
+      {
+        "question": "Which of these is an adverb?",
+        "options": ["Quick", "Quickly", "Quickness", "Quicker"],
+        "answer": "Quickly"
+      },
+      {
+        "question": "Which word is a synonym of 'Sad'?",
+        "options": ["Happy", "Joyful", "Melancholy", "Angry"],
+        "answer": "Melancholy"
+      },
+      {
+        "question": "What is the past tense of 'Go'?",
+        "options": ["Went", "Gone", "Going", "Goes"],
+        "answer": "Went"
+      },
+      {
+        "question": "Which of these sentences is in the future tense?",
+        "options": [
+          "She goes to school",
+          "She will go to school",
+          "She is going to school",
+          "She went to school"
+        ],
+        "answer": "She will go to school"
+      },
+      {
+        "question": "What is the plural of 'Mouse'?",
+        "options": ["Mice", "Mouses", "Micees", "Micey"],
+        "answer": "Mice"
+      },
+      {
+        "question": "Which of these words is a collective noun?",
+        "options": ["Team", "Tree", "Bird", "Book"],
+        "answer": "Team"
+      }
+    ]
+  },
+  {
+    "subject": "Government",
+    "questions": [
+      {
+        "question": "Who is the head of state in a parliamentary system of government?",
+        "options": ["President", "Prime Minister", "Monarch", "Governor"],
+        "answer": "Prime Minister"
+      },
+      {
+        "question": "What is the primary function of the legislature?",
+        "options": [
+          "Enforcing laws",
+          "Making laws",
+          "Interpreting laws",
+          "Executing laws"
+        ],
+        "answer": "Making laws"
+      },
+      {
+        "question": "What is the role of the judiciary?",
+        "options": [
+          "Making laws",
+          "Enforcing laws",
+          "Interpreting laws",
+          "Advising the government"
+        ],
+        "answer": "Interpreting laws"
+      },
+      {
+        "question": "Who elects the president in a democratic system?",
+        "options": ["Parliament", "Electoral College", "People", "Government"],
+        "answer": "People"
+      },
+      {
+        "question": "Which of the following is not a form of government?",
+        "options": ["Monarchy", "Democracy", "Dictatorship", "Capitalism"],
+        "answer": "Capitalism"
+      },
+      {
+        "question": "Which of the following countries has a federal government?",
+        "options": ["United Kingdom", "United States", "France", "Japan"],
+        "answer": "United States"
+      },
+      {
+        "question": "What is the highest law of the land in many countries?",
+        "options": [
+          "Constitution",
+          "Statutes",
+          "Executive Orders",
+          "Regulations"
+        ],
+        "answer": "Constitution"
+      },
+      {
+        "question": "Which system allows citizens to participate in decision-making?",
+        "options": ["Democracy", "Monarchy", "Dictatorship", "Oligarchy"],
+        "answer": "Democracy"
+      },
+      {
+        "question": "In a unitary government, who holds most of the power?",
+        "options": [
+          "State governments",
+          "Local governments",
+          "Central government",
+          "Citizens"
+        ],
+        "answer": "Central government"
+      },
+      {
+        "question": "What is a referendum?",
+        "options": [
+          "A direct vote by the electorate on a specific proposal",
+          "A type of election",
+          "A government official",
+          "A political party"
+        ],
+        "answer": "A direct vote by the electorate on a specific proposal"
+      },
+      {
+        "question": "What does a constitution define?",
+        "options": [
+          "The laws of the country",
+          "The structure of government",
+          "The political parties",
+          "The economy"
+        ],
+        "answer": "The structure of government"
+      },
+      {
+        "question": "Which of the following is an example of an authoritarian government?",
+        "options": ["North Korea", "United States", "India", "Canada"],
+        "answer": "North Korea"
+      },
+      {
+        "question": "In which system of government is power divided between central and local governments?",
+        "options": ["Federalism", "Unitarianism", "Monarchy", "Oligarchy"],
+        "answer": "Federalism"
+      },
+      {
+        "question": "Which of the following is a type of democracy?",
+        "options": ["Direct democracy", "Autocracy", "Monarchy", "Oligarchy"],
+        "answer": "Direct democracy"
+      },
+      {
+        "question": "Which of the following is a major function of political parties?",
+        "options": [
+          "To control the government",
+          "To create laws",
+          "To provide an arena for policy debate",
+          "To elect the judiciary"
+        ],
+        "answer": "To provide an arena for policy debate"
+      },
+      {
+        "question": "What is the function of a constitution?",
+        "options": [
+          "To set limits on government power",
+          "To create political parties",
+          "To provide funding for elections",
+          "To run the economy"
+        ],
+        "answer": "To set limits on government power"
+      },
+      {
+        "question": "What is the purpose of checks and balances?",
+        "options": [
+          "To ensure one branch of government does not become too powerful",
+          "To elect the president",
+          "To pass laws",
+          "To regulate businesses"
+        ],
+        "answer": "To ensure one branch of government does not become too powerful"
+      },
+      {
+        "question": "Which of the following is not a type of democracy?",
+        "options": [
+          "Representative democracy",
+          "Direct democracy",
+          "Republic",
+          "Oligarchy"
+        ],
+        "answer": "Oligarchy"
+      }
+    ]
+  },
+  {
+    "subject": "Physics",
+    "questions": [
+      {
+        "question": "What is the unit of force?",
+        "options": ["Newton", "Joule", "Watt", "Pascal"],
+        "answer": "Newton"
+      },
+      {
+        "question": "What is the speed of light in a vacuum?",
+        "options": [
+          "3 × 10^6 m/s",
+          "3 × 10^7 m/s",
+          "3 × 10^8 m/s",
+          "3 × 10^9 m/s"
+        ],
+        "answer": "3 × 10^8 m/s"
+      },
+      {
+        "question": "What is the formula for acceleration?",
+        "options": [
+          "Force ÷ Mass",
+          "Mass × Speed",
+          "Speed ÷ Time",
+          "Change in velocity ÷ Time"
+        ],
+        "answer": "Change in velocity ÷ Time"
+      },
+      {
+        "question": "What is the unit of energy?",
+        "options": ["Joule", "Newton", "Pascal", "Meter"],
+        "answer": "Joule"
+      },
+      {
+        "question": "What does Newton's first law of motion state?",
+        "options": [
+          "An object will remain at rest or in motion unless acted upon by an external force",
+          "The force acting on an object is equal to its mass times acceleration",
+          "For every action, there is an equal and opposite reaction",
+          "Energy cannot be created or destroyed"
+        ],
+        "answer": "An object will remain at rest or in motion unless acted upon by an external force"
+      },
+      {
+        "question": "What is the unit of power?",
+        "options": ["Watt", "Newton", "Joule", "Pascal"],
+        "answer": "Watt"
+      },
+      {
+        "question": "Which of the following is a scalar quantity?",
+        "options": ["Speed", "Velocity", "Force", "Acceleration"],
+        "answer": "Speed"
+      },
+      {
+        "question": "What is the law of conservation of energy?",
+        "options": [
+          "Energy cannot be created or destroyed, only transformed",
+          "Energy increases over time",
+          "Energy is a result of motion",
+          "Energy is always lost to friction"
+        ],
+        "answer": "Energy cannot be created or destroyed, only transformed"
+      },
+      {
+        "question": "What is the unit of electric charge?",
+        "options": ["Coulomb", "Ampere", "Volt", "Ohm"],
+        "answer": "Coulomb"
+      },
+      {
+        "question": "What is the formula for calculating work?",
+        "options": [
+          "Force × Distance",
+          "Mass × Acceleration",
+          "Power × Time",
+          "Energy ÷ Time"
+        ],
+        "answer": "Force × Distance"
+      },
+      {
+        "question": "Which of the following is an example of potential energy?",
+        "options": [
+          "A moving car",
+          "A compressed spring",
+          "A flowing river",
+          "A light bulb"
+        ],
+        "answer": "A compressed spring"
+      },
+      {
+        "question": "What is the difference between speed and velocity?",
+        "options": [
+          "Speed has direction, velocity does not",
+          "Speed is the rate of change of distance, velocity includes direction",
+          "Speed is a force, velocity is an object",
+          "Velocity is faster than speed"
+        ],
+        "answer": "Speed is the rate of change of distance, velocity includes direction"
+      },
+      {
+        "question": "What is the unit of electric current?",
+        "options": ["Ampere", "Volt", "Coulomb", "Ohm"],
+        "answer": "Ampere"
+      },
+      {
+        "question": "What is Ohm's law?",
+        "options": ["V = IR", "V = P/I", "P = IV", "F = ma"],
+        "answer": "V = IR"
+      },
+      {
+        "question": "What is the kinetic energy of an object?",
+        "options": [
+          "Energy due to motion",
+          "Energy stored in an object",
+          "Energy from temperature",
+          "Energy due to force"
+        ],
+        "answer": "Energy due to motion"
+      },
+      {
+        "question": "What is the unit of frequency?",
+        "options": ["Hertz", "Joule", "Pascal", "Ampere"],
+        "answer": "Hertz"
+      }
+    ]
+  },
+  {
+    "subject": "Chemistry",
+    "questions": [
+      {
+        "question": "What is the chemical formula for table salt?",
+        "options": ["NaCl", "H2O", "CO2", "O2"],
+        "answer": "NaCl"
+      },
+      {
+        "question": "Which of this represent the Formula of Micheal Faraday's  first law of electrolysis?",
+        "options": ["Q=It", "M=It", "M=it", "Q=it"],
+        "answer": "M=it"
+      },
+      {
+        "question": "What is the pH of an acidic solution?",
+        "options": ["Less than 7", "7", "More than 7", "14"],
+        "answer": "Less than 7"
+      },
+      {
+        "question": "What is the atomic number of hydrogen?",
+        "options": ["1", "2", "3", "4"],
+        "answer": "1"
+      },
+      {
+        "question": "What is the molecular formula for glucose?",
+        "options": ["C6H12O6", "CH4", "CO2", "H2O"],
+        "answer": "C6H12O6"
+      },
+      {
+        "question": "What is the chemical symbol for gold?",
+        "options": ["Au", "Ag", "Fe", "Pb"],
+        "answer": "Au"
+      },
+      {
+        "question": "What is the chemical symbol for water?",
+        "options": ["H2O", "O2", "CO2", "NaCl"],
+        "answer": "H2O"
+      },
+      {
+        "question": "What is the pH of a neutral solution?",
+        "options": ["0", "7", "14", "10"],
+        "answer": "7"
+      },
+      {
+        "question": "What is the atomic number of carbon?",
+        "options": ["6", "8", "12", "14"],
+        "answer": "6"
+      },
+      {
+        "question": "What is the molecular formula for methane?",
+        "options": ["CH4", "C2H6", "CH3", "C3H8"],
+        "answer": "CH4"
+      },
+      {
+        "question": "What is the chemical symbol for sodium?",
+        "options": ["Na", "K", "Cl", "S"],
+        "answer": "Na"
+      },
+      {
+        "question": "What type of bond is formed when two atoms share electrons?",
+        "options": [
+          "Covalent bond",
+          "Ionic bond",
+          "Metallic bond",
+          "Hydrogen bond"
+        ],
+        "answer": "Covalent bond"
+      },
+      {
+        "question": "What is the atomic number of oxygen?",
+        "options": ["6", "7", "8", "9"],
+        "answer": "8"
+      },
+      {
+        "question": "Which gas is most abundant in Earth's atmosphere?",
+        "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Argon"],
+        "answer": "Nitrogen"
+      }
+    ]
+  },
+  {
+    "subject": "Literature",
+    "questions": [
+      {
+        "question": "Who wrote 'Things Fall Apart'?",
+        "options": [
+          "Chinua Achebe",
+          "Wole Soyinka",
+          "Ngugi wa Thiong'o",
+          "J.K. Rowling"
+        ],
+        "answer": "Chinua Achebe"
+      },
+      {
+        "question": "What is the genre of 'Romeo and Juliet'?",
+        "options": ["Comedy", "Tragedy", "Epic", "Satire"],
+        "answer": "Tragedy"
+      },
+      {
+        "question": "What type of novel is 'Brave New World'?",
+        "options": ["Dystopian", "Romantic", "Historical", "Comedy"],
+        "answer": "Dystopian"
+      },
+      {
+        "question": "What is the main setting of 'Of Mice and Men'?",
+        "options": [
+          "New York",
+          "Salinas Valley",
+          "San Francisco",
+          "Los Angeles"
+        ],
+        "answer": "Salinas Valley"
+      },
+      {
+        "question": "In which country is 'The Alchemist' by Paulo Coelho set?",
+        "options": ["Brazil", "Spain", "Egypt", "Morocco"],
+        "answer": "Egypt"
+      },
+      {
+        "question": "Which character says the famous line 'To be or not to be, that is the question'?",
+        "options": ["Macbeth", "Hamlet", "Othello", "King Lear"],
+        "answer": "Hamlet"
+      },
+      {
+        "question": "What is the main theme of 'The Catcher in the Rye'?",
+        "options": [
+          "Identity and belonging",
+          "War and peace",
+          "Love and relationships",
+          "Racism and injustice"
+        ],
+        "answer": "Identity and belonging"
+      },
+      {
+        "question": "In 'Frankenstein', who is the monster's creator?",
+        "options": [
+          "Victor Frankenstein",
+          "Dr. Jekyll",
+          "Sherlock Holmes",
+          "Hannibal Lecter"
+        ],
+        "answer": "Victor Frankenstein"
+      }
+    ]
+  }
+]
