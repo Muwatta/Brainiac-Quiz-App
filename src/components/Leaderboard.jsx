@@ -7,10 +7,12 @@ const Leaderboard = ({ refreshTrigger }) => {
   const [loadingError, setLoadingError] = useState(false);
 
   useEffect(() => {
-
+    console.log('Refresh Trigger:', refreshTrigger);
     const fetchLeaderboard = async () => {
       try {
         const results = await getTopResults();
+        console.log('Fetched leaderboard data:', results);
+
         const validResults = results.filter(
           player =>
             player.score !== undefined &&
@@ -33,10 +35,10 @@ const Leaderboard = ({ refreshTrigger }) => {
     };
 
     fetchLeaderboard();
-  }, [refreshTrigger]);
+  }, [refreshTrigger]); 
 
   return (
-    <div className="leaderboard p-6 bg-[#041d36af] rounded-lg shadow-md">
+    <div className="leaderboard p-4 bg-[#041d36af] rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center text-[#00ffff]">
         Leaderboard
       </h2>

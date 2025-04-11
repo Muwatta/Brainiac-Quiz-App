@@ -63,8 +63,7 @@ const Quiz = () => {
 
   // Timer logic
   useEffect(() => {
-    if (!playerInfo) return; // Ensure the timer starts only after player info is set
-
+    if (!playerInfo) return; 
     const timer = setInterval(() => {
       setTimeLeft(prevTime => {
         if (prevTime <= 1) {
@@ -194,6 +193,24 @@ const Quiz = () => {
         </div>
       </div>
 
+      {/* Submit and Hint Buttons */}
+      <div className="flex justify-start items-center mb-4 space-x-4">
+        <button
+          className="bg-green-500 text-blue-950 py-2 px-4 rounded hover:bg-green-700"
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
+        <button
+          className="bg-yellow-500 text-white py-2 px-4 rounded-full hover:bg-yellow-700 animate-pulse"
+          onClick={useHint}
+          disabled={hintCount === 0}
+        >
+          {hintCount}
+        </button>
+      </div>
+
+      {/* Quiz Progress Bar */}
       <div className="mb-4">
         <div className="w-full bg-gray-200 rounded-full h-2.5">
           <div
@@ -207,8 +224,9 @@ const Quiz = () => {
         </div>
       </div>
 
+      {/* Quiz Question */}
       <motion.h3
-        className="text-lg font-bold mb-4"
+        className="text-lg font-bold mb-4 text-black" // Set text color to black
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -217,6 +235,7 @@ const Quiz = () => {
         {questions[currentQuestionIndex]?.question || 'Loading...'}
       </motion.h3>
 
+      {/* Quiz Options */}
       <motion.div
         className="options mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4"
         initial={{ opacity: 0, x: -50 }}
@@ -239,45 +258,6 @@ const Quiz = () => {
           </button>
         ))}
       </motion.div>
-
-      {/* Submit and Hint Buttons */}
-      <div className="flex justify-center items-center mb-4 space-x-4">
-        <button
-          className="bg-green-500 text-blue-950 py-2 px-4 rounded hover:bg-green-700"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-        <button
-          className="bg-yellow-500 text-white py-2 px-4 rounded-full hover:bg-yellow-700 animate-pulse"
-          onClick={useHint}
-          disabled={hintCount === 0}
-        >
-          {hintCount}
-        </button>
-      </div>
-
-      {/* Back and Next Buttons */}
-      <div className="flex justify-between items-center mt-4">
-        <button
-          className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700"
-          onClick={() => setCurrentQuestionIndex(prev => Math.max(prev - 1, 0))}
-          disabled={currentQuestionIndex === 0}
-        >
-          Back
-        </button>
-        <button
-          className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700"
-          onClick={() =>
-            setCurrentQuestionIndex(prev =>
-              Math.min(prev + 1, questions.length - 1)
-            )
-          }
-          disabled={currentQuestionIndex === questions.length - 1}
-        >
-          Next
-        </button>
-      </div>
     </motion.div>
   );
 };

@@ -1,13 +1,10 @@
 import React from 'react';
 import Quiz from '../components/Quiz';
 
-const QuizPage = () => {
+const QuizPage = ({ onQuizSubmit }) => {
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg">
-      {/* <h1 className="text-2xl text-center font-[500] text-gray-800 mb-4">
-        Quiz Page
-      </h1> */}
-      <Quiz />
+    <div className="bg-white shadow-md rounded-lg">
+      <Quiz onQuizSubmit={onQuizSubmit} />
     </div>
   );
 };

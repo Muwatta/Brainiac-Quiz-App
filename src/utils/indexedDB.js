@@ -56,7 +56,7 @@ export const getTopResults = async () => {
   return new Promise((resolve, reject) => {
     const request = store.getAll();
     request.onsuccess = () => {
-      const results = request.result;
+      const results = request.result || []; // Handle empty data
       console.log('Fetched leaderboard:', results);
       resolve(
         results.sort((a, b) => b.score - a.score || a.timeUsed - b.timeUsed)
@@ -64,7 +64,7 @@ export const getTopResults = async () => {
     };
     request.onerror = event => {
       console.error('Error fetching leaderboard:', event.target.error);
-      reject(event.target.error);
+      resolve([]); // Return an empty array on error
     };
   });
 };

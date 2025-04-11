@@ -25,3 +25,33 @@ if ('serviceWorker' in navigator) {
       });
   }); 
 }
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open('brainiac-quiz-cache').then(cache => {
+      return cache.addAll([
+        '/',
+        '/index.html',
+        '/static/js/bundle.js',
+        '/static/css/main.css',
+        '/favicon.ico',
+        '/leaderboard',
+      ]);
+    })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    }).catch(() => {
+      if (event.request.url.includes('/leaderboard')) {
+        return new Response(
+          JSON.stringify([]),
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+    })
+  );
+});

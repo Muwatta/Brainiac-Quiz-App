@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Favicon from 'react-favicon';
 import Navbar from './components/Navbar';
@@ -10,6 +10,12 @@ import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 
 const App = () => {
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const handleQuizSubmit = () => {
+    setRefreshTrigger(prev => prev + 1); // Increment to trigger leaderboard refresh
+  };
+
   return (
     <Router>
       <Favicon url="/favicon.ico" />
@@ -18,8 +24,11 @@ const App = () => {
         <main className="flex-grow p-6">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/quiz" element={<QuizPage />} />
-            <Route path="/leaderboard" element={<LeaderboardPage />} />
+            <Route path="/quiz" element={<QuizPage onQuizSubmit={handleQuizSubmit} />} />
+            <Route
+              path="/leaderboard"
+              element={<LeaderboardPage key={refreshTrigger} refreshTrigger={refreshTrigger} />}
+            />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>

@@ -40,48 +40,42 @@ const QuizValidationForm = ({ onSubmit }) => {
   };
 
   return (
-    <div className="validation-form p-4 bg-deep-navy rounded-lg shadow-md">
+    <div className="validation-form p-10 bg-deep-navy rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center text-white">
         Player Information
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-1 text-white">
-            Name
-          </label>
+          
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border border-midnight-blue rounded px-3 py-2"
+            className="w-full border border-midnight-blue rounded px-3 py-3 mb-3"
             placeholder="Enter your name"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1 text-white">
-            School
-          </label>
+         
           <input
             type="text"
             name="school"
             value={formData.school}
             onChange={handleChange}
-            className="w-full border border-white rounded px-3 py-2"
+            className="w-full border border-white rounded px-3 py-3 mb-3"
             placeholder="Enter your school"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1 text-white">
-            Class
-          </label>
+         
           <select
             name="class"
             value={formData.class}
             onChange={handleChange}
-            className="w-full border border-white rounded px-3 py-2"
+            className="w-full border border-white rounded px-3 py-3 mb-3"
             required
           >
             <option value="">Select your class</option>
@@ -91,14 +85,12 @@ const QuizValidationForm = ({ onSubmit }) => {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1 text-white">
-            Subject
-          </label>
+         
           <select
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full border border-white rounded px-3 py-2"
+            className="w-full border border-white rounded px-3 py-3 mb-3"
             required
           >
             <option value="">Select a subject</option>
@@ -118,12 +110,12 @@ const QuizValidationForm = ({ onSubmit }) => {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="w-full border border-white rounded px-3 py-2"
+            className="w-full border border-white rounded text-white px-3 py-3"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-950 text-white py-2 px-4 rounded hover:bg-blue-600"
+          className="w-full bg-blue-950 text-white py-3 px-4 rounded hover:bg-blue-600"
         >
           Start Quiz
         </button>
