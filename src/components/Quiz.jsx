@@ -10,12 +10,13 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [playerInfo, setPlayerInfo] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(90);
+  const [timeLeft, setTimeLeft] = useState(10); // Timer for each question
   const [quizEnded, setQuizEnded] = useState(false);
   const [message, setMessage] = useState('');
   const [hintCount, setHintCount] = useState(2);
   const [filteredOptions, setFilteredOptions] = useState(null);
   const [optionColorsMap, setOptionColorsMap] = useState([]);
+  const [hintUsed, setHintUsed] = useState(false); // Track if a hint is used
   const navigate = useNavigate();
 
   // Colors for MCQ options
@@ -60,9 +61,6 @@ const Quiz = () => {
             () => Math.random() - 0.5
           );
           setQuestions(shuffledQuestions);
-
-          const totalTime = shuffledQuestions.length * 5; 
-          setTimeLeft(totalTime); 
         } catch (error) {
           console.error('Error fetching questions:', error);
           setMessage('Failed to load questions. Please try again.');
@@ -75,14 +73,15 @@ const Quiz = () => {
     }
   }, [playerInfo]);
 
+  // Timer logic for each question
   useEffect(() => {
     if (!playerInfo || timeLeft <= 0) return;
 
     const timer = setInterval(() => {
       setTimeLeft(prevTime => {
         if (prevTime <= 1) {
-          clearInterval(timer); 
-          handleSubmit(); 
+          clearInterval(timer);
+          handleNextQuestion(false); // Automatically move to the next question if time runs out
           return 0;
         }
         return prevTime - 1;
@@ -95,16 +94,15 @@ const Quiz = () => {
   const handleAnswer = selectedOption => {
     const currentQuestion = questions[currentQuestionIndex];
     if (selectedOption === currentQuestion.answer) {
-      setScore(prevScore => prevScore + 1);
+      setScore(prevScore => prevScore + (hintUsed ? 0.5 : 1)); // Add 0.5 or 1 point based on hint usage
     }
 
     setFilteredOptions(null);
+    setHintUsed(false); // Reset hint usage for the next question
 
     // Automatically move to the next question after 1 second
     setTimeout(() => {
-      setCurrentQuestionIndex(prev =>
-        Math.min(prev + 1, questions.length - 1)
-      );
+      handleNextQuestion(true);
     }, 1000);
   };
 
@@ -125,6 +123,18 @@ const Quiz = () => {
 
       setFilteredOptions(newOptions); // Update the options displayed
       setHintCount(prevCount => prevCount - 1); // Decrease hint count
+      setHintUsed(true); // Mark that a hint was used
+    }
+  };
+
+  const handleNextQuestion = (isCorrect) => {
+    setTimeLeft(10); // Reset the timer for the next question
+
+    // Logic to move to the next question
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+    } else {
+      handleSubmit(); // End the quiz if it's the last question
     }
   };
 
@@ -139,22 +149,40 @@ const Quiz = () => {
       school: playerInfo.school,
       class: playerInfo.class,
       score: score || 0,
-      timeUsed: 90 - timeLeft,
+      timeUsed: questions.length * 10 - timeLeft, // Total time used
     };
 
-    await saveResult(result); // Save the result in IndexedDB
+    try {
+      // Send the player's result to the backend
+      const response = await fetch('https://brainiac-quiz-app.onrender.com/leaderboard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(result),
+      });
 
-    setQuizEnded(true);
+      if (!response.ok) {
+        throw new Error('Failed to submit score to the leaderboard');
+      }
 
-    if (score >= questions.length / 2) {
-      setMessage('Congratulations! You performed well. Keep it up!');
-    } else {
-      setMessage('Good effort! Keep practicing to improve your score.');
+      const data = await response.json();
+      console.log('Score submitted successfully:', data.message);
+
+      // Display a success message or navigate to the leaderboard
+      setQuizEnded(true);
+
+      if (score >= questions.length / 2) {
+        setMessage('Congratulations! You performed well. Keep it up!');
+      } else {
+        setMessage('Good effort! Keep practicing to improve your score.');
+      }
+
+      setTimeout(() => {
+        navigate('/leaderboard'); // Redirect to the leaderboard page
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting score:', error);
+      setMessage('Failed to submit your score. Please try again.');
     }
-
-    setTimeout(() => {
-      navigate('/leaderboard');
-    }, 20000);
   };
 
   if (!playerInfo) {
@@ -213,7 +241,7 @@ const Quiz = () => {
         {/* Timer */}
         <div
           className={`w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold bg-black-200 ${
-            timeLeft <= 10 ? 'bg-red-500 text-white animate-pulse' : 'bg-gray-200 dark:bg-gray-700 text-black dark:text-white'
+            timeLeft <= 3 ? 'bg-red-500 text-white animate-pulse' : 'bg-gray-200 dark:bg-gray-700 text-black dark:text-white'
           }`}
         >
           {timeLeft}s

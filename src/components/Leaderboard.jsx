@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaStar, FaRegStar, FaTrophy, FaShareAlt, FaThumbsUp } from 'react-icons/fa'; // Import icons
+import { FaStar, FaRegStar, FaTrophy, FaThumbsUp, FaShareAlt } from 'react-icons/fa';
+import { io } from 'socket.io-client'; 
 
 const Leaderboard = ({ refreshTrigger }) => {
   const [scores, setScores] = useState([]);
   const [loadingError, setLoadingError] = useState(false);
-  const [likes, setLikes] = useState({}); // Track likes for each player
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch('http://localhost:3000/leaderboard');
+        const response = await fetch('https://brainiac-quiz-app.onrender.com/leaderboard');
+        if (!response.ok) {
+          throw new Error('Failed to fetch leaderboard');
+        }
         const data = await response.json();
-        setScores(data);
+        setScores(data); 
         setLoadingError(false);
       } catch (error) {
         console.error('Error fetching leaderboard:', error);
@@ -23,44 +26,73 @@ const Leaderboard = ({ refreshTrigger }) => {
     fetchLeaderboard();
   }, [refreshTrigger]);
 
-  // Function to calculate star rating based on score and total questions
-  const calculateStars = (score, totalQuestions) => {
-    const rating = Math.round((score / totalQuestions) * 5); // Convert score to a 5-star rating
-    return Math.min(rating, 5); // Ensure the rating does not exceed 5
-  };
+  useEffect(() => {
+    const socket = io('https://brainiac-quiz-app.onrender.com');
+    socket.on('update_likes', ({ id, likes }) => {
+      setScores((prevScores) =>
+        prevScores.map((player) =>
+          player.id === id ? { ...player, likes } : player
+        )
+      );
+    });
 
-  const handleLike = (playerId) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [playerId]: (prevLikes[playerId] || 0) + 1,
-    }));
-  };
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
-  const handleShare = (player) => {
-    const shareText = `Check out this amazing score by ${player.name || 'Anonymous Player'}: ${player.score} points!`;
-    if (navigator.share) {
-      navigator.share({
-        title: 'Leaderboard Score',
-        text: shareText,
-        url: window.location.href,
-      }).catch((error) => console.error('Error sharing:', error));
-    } else {
-      alert('Sharing is not supported on this browser.');
-    }
-  };
-
-  const submitScore = async (player) => {
+  const handleLikeToggle = async (playerId, liked) => {
     try {
-      const response = await fetch('http://localhost:3000/leaderboard', {
+      const endpoint = liked
+        ? 'https://brainiac-quiz-app.onrender.com/leaderboard/unlike'
+        : 'https://brainiac-quiz-app.onrender.com/leaderboard/like';
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(player),
+        body: JSON.stringify({ id: playerId }),
       });
+
+      if (!response.ok) {
+        throw new Error(`Failed to ${liked ? 'unlike' : 'like'} the player`);
+      }
+
       const data = await response.json();
-      console.log(data.message);
+
+      // Update the local state
+      setScores((prevScores) =>
+        prevScores.map((player) =>
+          player.id === playerId
+            ? { ...player, likes: data.player.likes, liked: !liked }
+            : player
+        )
+      );
     } catch (error) {
-      console.error('Error submitting score:', error);
+      console.error(`Error ${liked ? 'unliking' : 'liking'} the player:`, error);
     }
+  };
+
+  // Handle Share
+  const handleShare = (player) => {
+    const shareText = `Check out ${player.name}'s amazing score of ${player.score} at Brainiac Quiz!`;
+    if (navigator.share) {
+      navigator.share({
+        title: 'Brainiac Quiz Leaderboard',
+        text: shareText,
+        url: window.location.href,
+      });
+    } else {
+      alert(`Share this: ${shareText}`);
+    }
+  };
+
+  const calculateStars = (score) => {
+    // Example logic to calculate stars based on score
+    if (score >= 90) return 5;
+    if (score >= 70) return 4;
+    if (score >= 50) return 3;
+    if (score >= 30) return 2;
+    return 1;
   };
 
   return (
@@ -88,68 +120,71 @@ const Leaderboard = ({ refreshTrigger }) => {
         {scores.map((player, index) => (
           <motion.div
             key={`${player.id}-${index}`}
-            className={`p-4 border rounded shadow-sm flex flex-col items-center ${
+            className={`p-4 border rounded-lg shadow-md flex flex-col items-center ${
               index === 0
-                ? 'bg-yellow-400' // Gold for 1st place
+                ? 'bg-yellow-400' 
                 : index === 1
-                ? 'bg-gray-400' // Silver for 2nd place
+                ? 'bg-gray-400'
                 : index === 2
-                ? 'bg-orange-400' // Bronze for 3rd place
-                : 'bg-[#001e3bfa]' // Default background for others
+                ? 'bg-orange-400'
+                : 'bg-[#001e3bfa]'
             }`}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
           >
-            {player.profilePicture ? (
-              <img
-                src={player.profilePicture}
-                alt="Profile"
-                className="w-12 h-12 rounded-full mr-4 border-2 border-[#00ffff]"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
-            ) : (
-              <div className="w-12 h-12 rounded-full mr-4 border-2 border-[#00ffff] bg-gray-700" />
-            )}
-            <div className="text-center">
-              <h3 className="text-lg font-bold text-[#00ffff]">
-                {player.name || 'Anonymous Player'}
-              </h3>
-              <p className="text-[#fff]">
-                <strong>Score:</strong> {player.score ?? 0}
-              </p>
-              <p className="text-[#fff]">
-                <strong>Time:</strong> {player.timeUsed ?? 0} seconds
-              </p>
-              {/* Star Rating */}
-              <div className="flex items-center justify-center mt-2">
-                {Array.from({ length: 5 }).map((_, starIndex) => (
-                  <span key={starIndex}>
-                    {starIndex < calculateStars(player.score, player.totalQuestions) ? (
-                      <FaStar className="text-yellow-400" /> // Gold filled star
-                    ) : (
-                      <FaRegStar className="text-gray-400" /> // Gray empty star
-                    )}
-                  </span>
-                ))}
-              </div>
-              {/* Like and Share Buttons */}
-              <div className="flex items-center justify-center mt-4 space-x-4">
-                <button
-                  className="flex items-center text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600"
-                  onClick={() => handleLike(player.id)}
-                >
-                  <FaThumbsUp className="mr-2" /> Like ({likes[player.id] || 0})
-                </button>
-                <button
-                  className="flex items-center text-white bg-green-500 px-3 py-1 rounded hover:bg-green-600"
-                  onClick={() => handleShare(player)}
-                >
-                  <FaShareAlt className="mr-2" /> Share
-                </button>
-              </div>
+            {/* Player Avatar */}
+            <img
+              src={player.avatar || 'https://via.placeholder.com/100'} 
+              alt={`${player.name}'s avatar`}
+              className="w-20 h-20 rounded-full mb-2 shadow-lg border-4 border-[#eef0f0] bg-[#001e3b]"/>
+
+            {/* Player Name */}
+            <h3 className="text-lg font-bold text-[#020c0c]">
+              {player.name || 'Anonymous Player'}
+            </h3>
+
+            {/* Player Score */}
+            <p className="text-[#fff]">
+              <strong>Score:</strong> {player.score ?? 0}
+            </p>
+
+            {/* Player Time Used */}
+            <p className="text-[#fff]">
+              <strong>Time Used:</strong> {player.timeUsed ?? 0} seconds
+            </p>
+
+            {/* Player Rating */}
+            <div className="flex items-center mt-2">
+              {[...Array(5)].map((_, starIndex) => (
+                <span key={starIndex}>
+                  {starIndex < calculateStars(player.score) ? (
+                    <FaStar className="text-yellow-400" />
+                  ) : (
+                    <FaRegStar className="text-gray-400" />
+                  )}
+                </span>
+              ))}
+            </div>
+
+            {/* Like and Share Buttons */}
+            <div className="flex justify-between mt-4 w-full">
+              <button
+                className={`flex items-center ${
+                  player.liked ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
+                } text-white px-3 py-1 rounded`}
+                onClick={() => handleLikeToggle(player.id, player.liked)}
+              >
+                <FaThumbsUp className="mr-2" />
+                {player.liked ? 'Unlike' : 'Like'} ({player.likes || 0})
+              </button>
+
+              <button
+                className="flex items-center bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                onClick={() => handleShare(player)}
+              >
+                <FaShareAlt className="mr-2" /> Share
+              </button>
             </div>
           </motion.div>
         ))}
