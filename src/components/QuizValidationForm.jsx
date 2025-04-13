@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaUser } from 'react-icons/fa'; // Import user icon
 
 const QuizValidationForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -41,12 +43,21 @@ const QuizValidationForm = ({ onSubmit }) => {
 
   return (
     <div className="validation-form p-10 bg-deep-navy rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center text-white">
-        Player Information
-      </h2>
+      {/* Animated Heading with Icon */}
+      <motion.div
+        className="flex justify-center items-center mb-4"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <FaUser className="text-white text-3xl mr-2" /> {/* User Icon */}
+        <h2 className="text-2xl font-bold text-center text-white">
+          Player Information
+        </h2>
+      </motion.div>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          
           <input
             type="text"
             name="name"
@@ -58,7 +69,6 @@ const QuizValidationForm = ({ onSubmit }) => {
           />
         </div>
         <div>
-         
           <input
             type="text"
             name="school"
@@ -70,7 +80,6 @@ const QuizValidationForm = ({ onSubmit }) => {
           />
         </div>
         <div>
-         
           <select
             name="class"
             value={formData.class}
@@ -85,7 +94,6 @@ const QuizValidationForm = ({ onSubmit }) => {
           </select>
         </div>
         <div>
-         
           <select
             name="subject"
             value={formData.subject}

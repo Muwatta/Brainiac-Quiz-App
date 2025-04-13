@@ -10,11 +10,11 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [playerInfo, setPlayerInfo] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(90); 
+  const [timeLeft, setTimeLeft] = useState(90);
   const [quizEnded, setQuizEnded] = useState(false);
   const [message, setMessage] = useState('');
-  const [hintCount, setHintCount] = useState(2); 
-  const [filteredOptions, setFilteredOptions] = useState(null); 
+  const [hintCount, setHintCount] = useState(2);
+  const [filteredOptions, setFilteredOptions] = useState(null);
   const [optionColorsMap, setOptionColorsMap] = useState([]);
   const navigate = useNavigate();
 
@@ -29,6 +29,16 @@ const Quiz = () => {
     '#B39DDB', // Lavender Purple
     '#00BFA5', // Cool Teal
   ];
+
+  // Shuffle colors and map them to options
+  useEffect(() => {
+    if (questions.length > 0) {
+      const currentOptions = questions[currentQuestionIndex]?.options || [];
+      const shuffledColors = [...optionColors].sort(() => Math.random() - 0.5);
+      const colorsMap = currentOptions.map((_, index) => shuffledColors[index]);
+      setOptionColorsMap(colorsMap);
+    }
+  }, [currentQuestionIndex, questions]);
 
   // Fetch questions when player info is set
   useEffect(() => {
@@ -46,9 +56,13 @@ const Quiz = () => {
           if (!subjectQuestions) {
             throw new Error('No questions found for the selected subject');
           }
-          setQuestions(
-            subjectQuestions.questions.sort(() => Math.random() - 0.5)
+          const shuffledQuestions = subjectQuestions.questions.sort(
+            () => Math.random() - 0.5
           );
+          setQuestions(shuffledQuestions);
+
+          const totalTime = shuffledQuestions.length * 5; 
+          setTimeLeft(totalTime); 
         } catch (error) {
           console.error('Error fetching questions:', error);
           setMessage('Failed to load questions. Please try again.');
@@ -61,14 +75,14 @@ const Quiz = () => {
     }
   }, [playerInfo]);
 
-  // Timer logic
   useEffect(() => {
-    if (!playerInfo) return; 
+    if (!playerInfo || timeLeft <= 0) return;
+
     const timer = setInterval(() => {
       setTimeLeft(prevTime => {
         if (prevTime <= 1) {
-          clearInterval(timer); // Stop the timer when it reaches 0
-          handleSubmit();
+          clearInterval(timer); 
+          handleSubmit(); 
           return 0;
         }
         return prevTime - 1;
@@ -76,16 +90,7 @@ const Quiz = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [playerInfo]);
-
-  useEffect(() => {
-    if (questions.length > 0) {
-      const currentOptions = questions[currentQuestionIndex]?.options || [];
-      const shuffledColors = [...optionColors].sort(() => Math.random() - 0.5);
-      const colorsMap = currentOptions.map((_, index) => shuffledColors[index]);
-      setOptionColorsMap(colorsMap);
-    }
-  }, [currentQuestionIndex, questions]);
+  }, [playerInfo, timeLeft]);
 
   const handleAnswer = selectedOption => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -94,8 +99,12 @@ const Quiz = () => {
     }
 
     setFilteredOptions(null);
+
+    // Automatically move to the next question after 1 second
     setTimeout(() => {
-      setCurrentQuestionIndex(prev => Math.min(prev + 1, questions.length - 1));
+      setCurrentQuestionIndex(prev =>
+        Math.min(prev + 1, questions.length - 1)
+      );
     }, 1000);
   };
 
@@ -105,13 +114,17 @@ const Quiz = () => {
       const incorrectOptions = currentQuestion.options.filter(
         option => option !== currentQuestion.answer
       );
-      const distractor =
-        incorrectOptions[Math.floor(Math.random() * incorrectOptions.length)];
-      const newOptions = [currentQuestion.answer, distractor].sort(
-        () => Math.random() - 0.5
+
+      // Randomly select two incorrect options to remove
+      const optionsToRemove = incorrectOptions.sort(() => Math.random() - 0.5).slice(0, 2);
+
+      // Filter out the options to remove and keep the correct answer and one incorrect option
+      const newOptions = currentQuestion.options.filter(
+        option => !optionsToRemove.includes(option)
       );
-      setFilteredOptions(newOptions);
-      setHintCount(prevCount => prevCount - 1);
+
+      setFilteredOptions(newOptions); // Update the options displayed
+      setHintCount(prevCount => prevCount - 1); // Decrease hint count
     }
   };
 
@@ -128,7 +141,6 @@ const Quiz = () => {
       score: score || 0,
       timeUsed: 90 - timeLeft,
     };
-
 
     await saveResult(result); // Save the result in IndexedDB
 
@@ -174,47 +186,61 @@ const Quiz = () => {
 
   return (
     <motion.div
-      className="quiz-container p-6 bg-white rounded-lg shadow-lg max-w-3xl mx-auto"
+      className="quiz-container p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-3xl mx-auto"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h3 className="text-lg font-bold">Player: {playerInfo?.name}</h3>
-          <p className="text-sm text-gray-600">School: {playerInfo?.school}</p>
+          <h3 className="text-lg font-bold text-gray-600">Player: {playerInfo?.name}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            School: {playerInfo?.school}
+          </p>
         </div>
+        <div className="flex flex-col items-end space-y-4">
+          <button
+            className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+
+      {/* Hint Bonus and Timer */}
+      <div className="flex justify-center items-center space-x-8 mb-6">
+        {/* Timer */}
         <div
-          className={`w-16 h-16 flex items-center justify-center rounded-full text-white font-bold text-lg ${
-            timeLeft <= 10 ? 'bg-red-500 animate-pulse' : 'bg-blue-500'
+          className={`w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold bg-black-200 ${
+            timeLeft <= 10 ? 'bg-red-500 text-white animate-pulse' : 'bg-gray-200 dark:bg-gray-700 text-black dark:text-white'
           }`}
         >
           {timeLeft}s
         </div>
-      </div>
 
-      {/* Submit and Hint Buttons */}
-      <div className="flex justify-start items-center mb-4 space-x-4">
-        <button
-          className="bg-green-500 text-blue-950 py-2 px-4 rounded hover:bg-green-700"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-        <button
-          className="bg-yellow-500 text-white py-2 px-4 rounded-full hover:bg-yellow-700 animate-pulse"
-          onClick={useHint}
-          disabled={hintCount === 0}
-        >
-          {hintCount}
-        </button>
+        {/* Hint Bonus */}
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-500 text-white text-lg font-bold">
+          <button
+            className="w-full h-full flex items-center justify-center rounded-full bg-yellow-500 text-white font-bold hover:bg-yellow-600"
+            onClick={useHint}
+            disabled={hintCount === 0} // Disable button when no hints are left
+          >
+            {hintCount}
+          </button>
+        </div>
       </div>
 
       {/* Quiz Progress Bar */}
       <div className="mb-4">
-        <div className="w-full bg-gray-200 rounded-full h-2.5">
+        <div className="flex justify-between items-center mb-2">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            Question {currentQuestionIndex + 1} of {questions.length}
+          </p>
+        </div>
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
           <div
-            className="bg-blue-500 h-2.5 rounded-full"
+            className="bg-green-500 h-2.5 rounded-full"
             style={{
               width: `${
                 ((currentQuestionIndex + 1) / questions.length) * 100
@@ -226,7 +252,7 @@ const Quiz = () => {
 
       {/* Quiz Question */}
       <motion.h3
-        className="text-lg font-bold mb-4 text-black" // Set text color to black
+        className="text-lg font-bold mb-4 text-black dark:text-white"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -245,9 +271,9 @@ const Quiz = () => {
         {currentOptions.map((option, index) => (
           <button
             key={index}
-            className="block w-full text-left py-2 px-4 rounded mb-2 hover:opacity-90"
+            className="block w-full text-left py-4 px-6 rounded-lg shadow-md hover:scale-105 transition-transform duration-200"
             style={{
-              backgroundColor: optionColorsMap[index],
+              backgroundColor: optionColorsMap[index], // Apply background color
               color: ['#FFC107', '#FF6F61'].includes(optionColorsMap[index])
                 ? 'darkgray'
                 : 'white',
@@ -258,6 +284,28 @@ const Quiz = () => {
           </button>
         ))}
       </motion.div>
+
+      {/* Navigation Buttons */}
+      <div className="flex justify-between items-center mt-4">
+        <button
+          className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700"
+          onClick={() => setCurrentQuestionIndex(prev => Math.max(prev - 1, 0))}
+          disabled={currentQuestionIndex === 0}
+        >
+          Back
+        </button>
+        <button
+          className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700"
+          onClick={() =>
+            setCurrentQuestionIndex(prev =>
+              Math.min(prev + 1, questions.length - 1)
+            )
+          }
+          disabled={currentQuestionIndex === questions.length - 1}
+        >
+          Next
+        </button>
+      </div>
     </motion.div>
   );
 };

@@ -33,19 +33,15 @@ export const saveResult = async result => {
     request.onerror = event => reject(event.target.error);
   });
 
-  console.log('All results before saving:', allResults); // Debugging log
 
   allResults.push(result);
   allResults.sort((a, b) => b.score - a.score || a.timeUsed - b.timeUsed);
-
-  console.log('All results after sorting:', allResults); // Debugging log
 
   const topResults = allResults.slice(0, 10);
 
   store.clear();
   topResults.forEach(res => store.add(res));
 
-  console.log('Top results saved:', topResults); // Debugging log
 };
 
 export const getTopResults = async () => {
@@ -57,13 +53,11 @@ export const getTopResults = async () => {
     const request = store.getAll();
     request.onsuccess = () => {
       const results = request.result || []; // Handle empty data
-      console.log('Fetched leaderboard:', results);
       resolve(
         results.sort((a, b) => b.score - a.score || a.timeUsed - b.timeUsed)
       );
     };
     request.onerror = event => {
-      console.error('Error fetching leaderboard:', event.target.error);
       resolve([]); // Return an empty array on error
     };
   });

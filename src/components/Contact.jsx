@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { FaEnvelope } from 'react-icons/fa'; // Import envelope icon
 
 const developers = [
   {
@@ -6,8 +8,8 @@ const developers = [
     name: 'Abdullah Musliudeen',
     image: '/images/muwatta.jpg',
     description:
-      'Frontend developer with expertise in React and Vite. Passionate about software, AI and teaching.',
-    skills: ['Tutor', 'Software Dev', 'AI', 'Automator'],
+      'Community builder, committed to equipping the next generation with future-ready skills through hands-on training, real-world projects, and technology-driven learning experiences.',
+    skills: ['Instructor', 'Software Dev', 'AI', 'Automator'],
   },
   {
     id: 2,
@@ -39,7 +41,17 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#145369] via-[#134b5f] to-[#000000] text-white">
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-4 text-center">Contact Us</h1>
+        {/* Animated Heading with Icon */}
+        <motion.div
+          className="flex justify-center items-center mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <FaEnvelope className="text-white text-3xl mr-2" /> {/* Envelope Icon */}
+          <h1 className="text-3xl font-bold text-center">Contact Us</h1>
+        </motion.div>
+
         <p className="mb-8 text-center">
           If you have any questions or feedback, feel free to reach out!
         </p>
@@ -75,7 +87,7 @@ const Contact = () => {
 
         <div className="mt-8 text-center">
           <h2 className="text-2xl font-bold mb-2 hover:text-[#3497399c]">Email:</h2>
-          <p>contact@brainiacQuizApp.com</p>
+          <p>algorisetechexplorers@gmail.com</p>
         </div>
       </div>
     </div>

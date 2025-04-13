@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { FaBrain } from 'react-icons/fa';
 
 const HomePage = () => {
   const robots = [
@@ -19,19 +20,44 @@ const HomePage = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h1
-        className="text-3xl font-bold text-white"
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+      <motion.div
+        className="flex justify-center items-center mb-6"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        Welcome to the Brainiac-Quiz-App
-      </motion.h1>
+        {/* Icon */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <FaBrain className="text-[#9FA65A] text-4xl mr-3" /> {/* Brain Icon */}
+        </motion.div>
+
+        {/* Heading */}
+        <motion.h1
+          className="text-3xl font-bold text-white"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            duration: 0.6,
+            ease: 'easeOut',
+          }}
+        >
+          Welcome to the Brainiac-Quiz App
+        </motion.h1>
+      </motion.div>
+
       <motion.p
         className="text-lg mt-4 text-[#9FA65A]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.4,
+          duration: 0.6,
+          ease: 'easeOut',
+        }}
       >
         Test your knowledge with our exciting quizzes.
       </motion.p>

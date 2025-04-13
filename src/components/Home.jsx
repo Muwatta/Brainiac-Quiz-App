@@ -1,5 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { motion } from 'framer-motion';
+import { FaLightbulb } from 'react-icons/fa'; // Import lightbulb icon
 
 const Home = () => {
   const settings = {
@@ -25,9 +27,32 @@ const Home = () => {
   return (
     <div className="home-container min-h-screen bg-gradient-to-b from-[#CADCFC] via-[#8AB6F9] to-[#00246B] text-gray-800">
       <header className="home-header">
-        <h1 className="text-4xl font-bold text-center mb-6 text-[#00246B]">
-          Welcome to the Quiz App
-        </h1>
+        {/* Animated Heading with Icon */}
+        <motion.div
+          className="flex justify-center items-center mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Animated Icon */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <FaLightbulb className="text-[#00246B] text-4xl mr-3" />
+          </motion.div>
+
+          {/* Animated Heading */}
+          <motion.h1
+            className="text-4xl font-bold text-center text-[#00246B]"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            Welcome to the Quiz App
+          </motion.h1>
+        </motion.div>
       </header>
       <div className="carousel">
         <Slider {...settings}>
