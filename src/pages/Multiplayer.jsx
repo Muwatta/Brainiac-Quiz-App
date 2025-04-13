@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3000'); // Replace with your backend server URL
+const socket = io('http://localhost:4000', {
+  transports: ['websocket'],
+});
 
 const Multiplayer = () => {
   const [room, setRoom] = useState('');
@@ -22,10 +24,12 @@ const Multiplayer = () => {
   };
 
   useEffect(() => {
+    // Register the 'receive_message' listener
     socket.on('receive_message', (data) => {
       setMessages((prevMessages) => [...prevMessages, data.message]);
     });
 
+    // Cleanup the listener on component unmount
     return () => {
       socket.off('receive_message');
     };

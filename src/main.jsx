@@ -9,26 +9,24 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
+// Re-enable the service worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(registrations => {
-    registrations.forEach(registration => registration.unregister());
-  });
-
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/service-worker.js')
-      .then(() => {
-        console.log('Service Worker registered successfully.');
+      .then((registration) => {
+        console.log('Service Worker registered successfully:', registration);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Service Worker registration failed:', error);
       });
-  }); 
+  });
 }
 
-self.addEventListener('install', event => {
+// Service worker install event
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open('brainiac-quiz-cache').then(cache => {
+    caches.open('brainiac-quiz-cache').then((cache) => {
       return cache.addAll([
         '/',
         '/index.html',
@@ -41,9 +39,10 @@ self.addEventListener('install', event => {
   );
 });
 
-self.addEventListener('fetch', event => {
+// Service worker fetch event
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(response => {
+    caches.match(event.request).then((response) => {
       return response || fetch(event.request);
     }).catch(() => {
       if (event.request.url.includes('/leaderboard')) {

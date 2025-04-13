@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { getTopResults } from '../utils/indexedDB';
 import { FaStar, FaRegStar, FaTrophy, FaShareAlt, FaThumbsUp } from 'react-icons/fa'; // Import icons
 
 const Leaderboard = ({ refreshTrigger }) => {
@@ -11,40 +10,12 @@ const Leaderboard = ({ refreshTrigger }) => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const results = await getTopResults();
-
-        // Filter out invalid results
-        const validResults = results.filter(
-          (player) =>
-            player.score !== undefined &&
-            !(player.score === 0 && player.timeUsed === 0)
-        );
-
-        // Ensure unique players based on `name`, `school`, and `class`
-        const uniqueResults = validResults.reduce((acc, current) => {
-          const uniqueKey = `${current.name}-${current.school}-${current.class}`;
-          const existingPlayer = acc.find(
-            (player) =>
-              `${player.name}-${player.school}-${player.class}` === uniqueKey
-          );
-          if (!existingPlayer) {
-            acc.push(current);
-          }
-          return acc;
-        }, []);
-
-
-        // Sort the results by score and time
-        const sortedResults = uniqueResults.sort((a, b) => {
-          if (b.score !== a.score) {
-            return b.score - a.score;
-          }
-          return a.timeUsed - b.timeUsed;
-        });
-
-        setScores(sortedResults.slice(0, 10));
+        const response = await fetch('http://localhost:3000/leaderboard');
+        const data = await response.json();
+        setScores(data);
         setLoadingError(false);
       } catch (error) {
+        console.error('Error fetching leaderboard:', error);
         setLoadingError(true);
       }
     };
@@ -75,6 +46,20 @@ const Leaderboard = ({ refreshTrigger }) => {
       }).catch((error) => console.error('Error sharing:', error));
     } else {
       alert('Sharing is not supported on this browser.');
+    }
+  };
+
+  const submitScore = async (player) => {
+    try {
+      const response = await fetch('http://localhost:3000/leaderboard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(player),
+      });
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error('Error submitting score:', error);
     }
   };
 
