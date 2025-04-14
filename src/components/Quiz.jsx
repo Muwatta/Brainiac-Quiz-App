@@ -41,7 +41,7 @@ const Quiz = () => {
 
           const shuffled = subjectData.questions.sort(() => Math.random() - 0.5);
           setQuestions(shuffled);
-          setTimeLeft(shuffled.length * 15); // 15 seconds per question
+          setTimeLeft(shuffled.length * 10); // 10 seconds per question
         } catch (err) {
           console.error(err);
           setMessage('Error loading questions');
