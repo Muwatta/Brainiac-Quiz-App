@@ -33,7 +33,6 @@ export const saveResult = async result => {
     request.onerror = event => reject(event.target.error);
   });
 
-
   allResults.push(result);
   allResults.sort((a, b) => b.score - a.score || a.timeUsed - b.timeUsed);
 
@@ -41,7 +40,6 @@ export const saveResult = async result => {
 
   store.clear();
   topResults.forEach(res => store.add(res));
-
 };
 
 export const getTopResults = async () => {
@@ -60,5 +58,20 @@ export const getTopResults = async () => {
     request.onerror = event => {
       resolve([]); // Return an empty array on error
     };
+  });
+};
+
+// ✅ NEW: Save entire array of scores (for updates like likes)
+export const saveAllResults = async (results) => {
+  const db = await openDatabase();
+  const transaction = db.transaction('leaderboard', 'readwrite');
+  const store = transaction.objectStore('leaderboard');
+
+  // Clear the store first
+  store.clear();
+
+  // Add each updated result
+  results.forEach(res => {
+    store.add(res);
   });
 };
