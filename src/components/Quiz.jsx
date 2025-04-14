@@ -10,13 +10,13 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [playerInfo, setPlayerInfo] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(10); // Timer for each question
+  const [timeLeft, setTimeLeft] = useState(10);
   const [quizEnded, setQuizEnded] = useState(false);
   const [message, setMessage] = useState('');
   const [hintCount, setHintCount] = useState(2);
   const [filteredOptions, setFilteredOptions] = useState(null);
   const [optionColorsMap, setOptionColorsMap] = useState([]);
-  const [hintUsed, setHintUsed] = useState(false); // Track if a hint is used
+  const [hintUsed, setHintUsed] = useState(false); 
   const navigate = useNavigate();
 
   // Colors for MCQ options
@@ -81,7 +81,7 @@ const Quiz = () => {
       setTimeLeft(prevTime => {
         if (prevTime <= 1) {
           clearInterval(timer);
-          handleNextQuestion(false); // Automatically move to the next question if time runs out
+          handleNextQuestion(false);
           return 0;
         }
         return prevTime - 1;
@@ -98,9 +98,8 @@ const Quiz = () => {
     }
 
     setFilteredOptions(null);
-    setHintUsed(false); // Reset hint usage for the next question
+    setHintUsed(false); 
 
-    // Automatically move to the next question after 1 second
     setTimeout(() => {
       handleNextQuestion(true);
     }, 1000);
@@ -113,16 +112,14 @@ const Quiz = () => {
         option => option !== currentQuestion.answer
       );
 
-      // Randomly select two incorrect options to remove
       const optionsToRemove = incorrectOptions.sort(() => Math.random() - 0.5).slice(0, 2);
 
-      // Filter out the options to remove and keep the correct answer and one incorrect option
       const newOptions = currentQuestion.options.filter(
         option => !optionsToRemove.includes(option)
       );
 
-      setFilteredOptions(newOptions); // Update the options displayed
-      setHintCount(prevCount => prevCount - 1); // Decrease hint count
+      setFilteredOptions(newOptions); 
+      setHintCount(prevCount => prevCount - 1);
       setHintUsed(true); // Mark that a hint was used
     }
   };
