@@ -1,23 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaCheckCircle, FaTrophy, FaClock, FaLightbulb } from 'react-icons/fa';
 
 const headerVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-
 const About = () => {
- return (
-  <div className="p-6 bg-deep-navy text-white rounded-lg shadow-lg max-w-4xl mx-auto">
-  <motion.h1
-    className="text-3xl font-bold text-center mb-6 text-ocean-blue"
-    variants={headerVariants}
-    initial="hidden"
-    animate="visible"
-  >
-    About Brainiac Quiz App
-  </motion.h1>
+  return (
+    <div className="p-6 bg-deep-navy text-white rounded-lg shadow-lg max-w-4xl mx-auto">
+      {/* Header */}
+      <motion.h1
+        className="text-3xl font-bold text-center mb-6 text-ocean-blue"
+        variants={headerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        About Brainiac Quiz App
+      </motion.h1>
+
+      {/* Introduction */}
       <p className="text-lg mb-4 text-white-slate">
         The Brainiac Quiz App is designed for junior and senior secondary school students to enhance their learning through interactive and engaging quizzes. It provides a platform for students to test their knowledge, improve their skills, and compete with friends in a fun and educational way.
       </p>
@@ -38,31 +41,45 @@ const About = () => {
         This innovative approach instills discipline in students, as they are constantly exposed to the type of questions they will encounter in their internal and external exams. It eliminates excuses like “I didn’t have the right materials to study” because Brainiac provides everything they need in one place.
       </p>
 
+      {/* Features Section */}
       <h2 className="text-2xl font-semibold mt-6 mb-4 text-[#0248d4]">
         Features of the Brainiac Quiz App
       </h2>
       <ul className="list-disc list-inside text-lg text-white-700 mb-6">
-        <li>Interactive quizzes with multiple-choice questions.</li>
-        <li>Progress tracking to monitor your performance over time.</li>
-        <li>Leaderboard to compete with friends and other users.</li>
-        <li>Hints and explanations for selected questions.</li>
+        <li>
+          <FaCheckCircle className="inline-block text-green-500 mr-2" />
+          Interactive quizzes with multiple-choice questions.
+        </li>
+        <li>
+          <FaTrophy className="inline-block text-yellow-500 mr-2" />
+          Leaderboard to compete with friends and other users.
+        </li>
+        <li>
+          <FaLightbulb className="inline-block text-blue-500 mr-2" />
+          Hints and explanations for selected questions.
+        </li>
+        <li>
+          <FaClock className="inline-block text-red-500 mr-2" />
+          Timer-based quizzes to challenge your speed and accuracy.
+        </li>
         <li>Offline mode to access quizzes without an internet connection.</li>
-        <li>Timer-based quizzes to challenge your speed and accuracy.</li>
         <li>Personalized feedback after completing a quiz.</li>
       </ul>
 
+      {/* How to Play Section */}
       <h2 className="text-2xl font-semibold mt-6 mb-4 text-[#0248d4]">
         How to Play the Quiz
       </h2>
       <ol className="list-decimal list-inside text-lg text-white-700 mb-6">
         <li>Select a subject or category to start the quiz.</li>
-        <li>Read each question carefully and choose the correct answer from the options provided.</li>
-        <li>Use hints if you're stuck (if hints are enabled for the quiz).</li>
+        <li>Read each question carefully and choose the correct answer.</li>
+        <li>Use hints if you're stuck (if enabled).</li>
         <li>Complete the quiz within the given time limit (if applicable).</li>
         <li>Submit your answers to see your score and feedback.</li>
         <li>Check the leaderboard to see how you rank among other players.</li>
       </ol>
 
+      {/* Rules Section */}
       <h2 className="text-2xl font-semibold mt-6 mb-4 text-[#0248d4]">
         Rules of the Game
       </h2>
@@ -75,6 +92,7 @@ const About = () => {
         <li>Cheating is discouraged—play fair and have fun!</li>
       </ul>
 
+      {/* Why Use Brainiac Section */}
       <h2 className="text-2xl font-semibold mt-6 mb-4 text-[#0248d4]">
         Why Use Brainiac Quiz App?
       </h2>

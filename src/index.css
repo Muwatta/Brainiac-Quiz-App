@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-serif; /* Default font for the entire app */
+}
+
+h1, h2, h3 {
+  @apply font-cursive; /* Apply cursive font to headings */
+}
+
+.navbar-links {
+  @apply font-tesla; /* Apply Tesla font to navbar links */
+}
+
 /* Add this to your global CSS file */
 @keyframes bounce {
   0%, 100% {

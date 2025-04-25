@@ -1,0 +1,488 @@
+[
+  {
+    "subject": "Mathematics",
+    "questions": [
+      {
+        "question": "What is the place value of 7 in 3,745?",
+        "options": ["7", "70", "700", "7000"],
+        "answer": "700"
+      },
+      {
+        "question": "What is 25% of 200?",
+        "options": ["25", "50", "100", "75"],
+        "answer": "50"
+      },
+      {
+        "question": "What is the value of √81?",
+        "options": ["7", "8", "9", "10"],
+        "answer": "9"
+      },
+      {
+        "question": "Simplify: 6 + 3 × 2",
+        "options": ["12", "18", "9", "15"],
+        "answer": "12"
+      },
+      {
+        "question": "What is the LCM of 4 and 6?",
+        "options": ["12", "24", "6", "8"],
+        "answer": "12"
+      },
+      {
+        "question": "How many sides does a hexagon have?",
+        "options": ["5", "6", "7", "8"],
+        "answer": "6"
+      },
+      {
+        "question": "What is 2/5 + 1/5?",
+        "options": ["3/10", "2/10", "3/5", "1/2"],
+        "answer": "3/5"
+      },
+      {
+        "question": "What is the product of 0 and 9?",
+        "options": ["9", "0", "1", "None"],
+        "answer": "0"
+      },
+      {
+        "question": "If x = 3, what is the value of 2x + 1?",
+        "options": ["5", "6", "7", "8"],
+        "answer": "7"
+      },
+      {
+        "question": "Convert 0.75 to a fraction.",
+        "options": ["3/4", "1/2", "1/4", "4/5"],
+        "answer": "3/4"
+      },
+      {
+        "question": "Which is the largest: 0.6, 2/3, 0.7, 3/5?",
+        "options": ["0.6", "2/3", "0.7", "3/5"],
+        "answer": "0.7"
+      },
+      {
+        "question": "What is the area of a rectangle with length 5cm and width 3cm?",
+        "options": ["8cm²", "15cm²", "10cm²", "12cm²"],
+        "answer": "15cm²"
+      },
+      {
+        "question": "What is the next prime number after 11?",
+        "options": ["12", "13", "14", "15"],
+        "answer": "13"
+      },
+      {
+        "question": "Which number is a multiple of both 3 and 4?",
+        "options": ["6", "9", "12", "18"],
+        "answer": "12"
+      },
+      {
+        "question": "Find the perimeter of a square with side 6cm.",
+        "options": ["12cm", "18cm", "24cm", "36cm"],
+        "answer": "24cm"
+      }
+    ]
+  },  
+    {
+      "subject": "English",
+      "questions": [
+        {
+          "question": "What is the plural of 'Book'?",
+          "options": ["Books", "Bookes", "Bookies", "Book"],
+          "answer": "Books"
+        },
+        {
+          "question": "Which of these is a noun?",
+          "options": ["Run", "Table", "Quickly", "Beautiful"],
+          "answer": "Table"
+        },
+        {
+          "question": "What is the opposite of 'Big'?",
+          "options": ["Small", "Tall", "Wide", "Short"],
+          "answer": "Small"
+        },
+        {
+          "question": "Which of these is a verb?",
+          "options": ["Run", "Happy", "Table", "Quick"],
+          "answer": "Run"
+        },
+        {
+          "question": "Which of these is a pronoun?",
+          "options": ["She", "Table", "Quickly", "Beautiful"],
+          "answer": "She"
+        },
+        {
+          "question": "What is the past tense of 'Go'?",
+          "options": ["Goes", "Gone", "Went", "Going"],
+          "answer": "Went"
+        },
+        {
+          "question": "Which of these is an adjective?",
+          "options": ["Happy", "Run", "Quickly", "Table"],
+          "answer": "Happy"
+        },
+        {
+          "question": "What is the synonym of 'Happy'?",
+          "options": ["Sad", "Joyful", "Angry", "Tired"],
+          "answer": "Joyful"
+        },
+        {
+          "question": "Which of these is a preposition?",
+          "options": ["On", "Run", "Happy", "Table"],
+          "answer": "On"
+        },
+        {
+          "question": "What is the plural of 'Child'?",
+          "options": ["Childs", "Children", "Childes", "Child"],
+          "answer": "Children"
+        },
+        {
+          "question": "Which of these is a conjunction?",
+          "options": ["And", "Run", "Happy", "Table"],
+          "answer": "And"
+        },
+        {
+          "question": "What is the opposite of 'Love'?",
+          "options": ["Hate", "Anger", "Sadness", "Joy"],
+          "answer": "Hate"
+        },
+        {
+          "question": "Which of these is an adverb?",
+          "options": ["Quickly", "Quick", "Quickness", "Quicker"],
+          "answer": "Quickly"
+        },
+        {
+          "question": "What is the past tense of 'Eat'?",
+          "options": ["Eats", "Eating", "Ate", "Eaten"],
+          "answer": "Ate"
+        },
+        {
+          "question": "What is the plural of 'Mouse'?",
+          "options": ["Mice", "Mouses", "Mouse", "Mices"],
+          "answer": "Mice"
+        }
+      ]
+    },
+
+      {
+        "subject": "Basic Science",
+        "questions": [
+          {
+            "question": "What do plants need to make their food?",
+            "options": ["Oxygen", "Sunlight", "Soil", "Water"],
+            "answer": "Sunlight"
+          },
+          {
+            "question": "Which of these is a living thing?",
+            "options": ["Stone", "Book", "Goat", "Car"],
+            "answer": "Goat"
+          },
+          {
+            "question": "What part of the plant holds it in the soil?",
+            "options": ["Stem", "Leaf", "Root", "Flower"],
+            "answer": "Root"
+          },
+          {
+            "question": "Which of the following is a solid?",
+            "options": ["Air", "Water", "Stone", "Oil"],
+            "answer": "Stone"
+          },
+          {
+            "question": "What gas do humans breathe in to stay alive?",
+            "options": ["Carbon dioxide", "Oxygen", "Hydrogen", "Nitrogen"],
+            "answer": "Oxygen"
+          },
+          {
+            "question": "What is the main source of energy on Earth?",
+            "options": ["Moon", "Sun", "Electricity", "Fire"],
+            "answer": "Sun"
+          },
+          {
+            "question": "How many legs does an insect have?",
+            "options": ["4", "6", "8", "10"],
+            "answer": "6"
+          },
+          {
+            "question": "What is the boiling point of water?",
+            "options": ["0°C", "50°C", "100°C", "120°C"],
+            "answer": "100°C"
+          },
+          {
+            "question": "Which of these animals is a reptile?",
+            "options": ["Dog", "Cat", "Lizard", "Cow"],
+            "answer": "Lizard"
+          },
+          {
+            "question": "What is the function of the heart?",
+            "options": ["To breathe", "To pump blood", "To eat", "To see"],
+            "answer": "To pump blood"
+          },
+          {
+            "question": "What part of the body helps us to see?",
+            "options": ["Nose", "Ear", "Eye", "Mouth"],
+            "answer": "Eye"
+          },
+          {
+            "question": "Which organ helps in breathing?",
+            "options": ["Liver", "Lungs", "Kidney", "Heart"],
+            "answer": "Lungs"
+          },
+          {
+            "question": "What is used to measure temperature?",
+            "options": ["Ruler", "Scale", "Thermometer", "Clock"],
+            "answer": "Thermometer"
+          },
+          {
+            "question": "What state of matter is water?",
+            "options": ["Solid", "Gas", "Liquid", "Vapour"],
+            "answer": "Liquid"
+          },
+          {
+            "question": "Which of these is NOT a sense organ?",
+            "options": ["Eye", "Ear", "Liver", "Nose"],
+            "answer": "Liver"
+          }
+        ]
+      },
+      {
+        "subject": "Basic Technology",
+        "questions": [
+          {
+            "question": "Which tool is used to drive nails into wood?",
+            "options": ["Saw", "File", "Hammer", "Pliers"],
+            "answer": "Hammer"
+          },
+          {
+            "question": "Which of these is a type of wood?",
+            "options": ["Rubber", "Pine", "Glass", "Plastic"],
+            "answer": "Pine"
+          },
+          {
+            "question": "What do we use to measure length?",
+            "options": ["Scale", "Pencil", "Eraser", "Brush"],
+            "answer": "Scale"
+          },
+          {
+            "question": "Which of these is a machine part?",
+            "options": ["Gear", "Paper", "Soap", "Rubber"],
+            "answer": "Gear"
+          },
+          {
+            "question": "What do we use to tighten bolts?",
+            "options": ["Hammer", "Spanner", "Saw", "Nail"],
+            "answer": "Spanner"
+          },
+          {
+            "question": "Which of these is a source of electricity?",
+            "options": ["Battery", "Water", "Book", "Stone"],
+            "answer": "Battery"
+          },
+          {
+            "question": "What material is used to make windows?",
+            "options": ["Glass", "Cloth", "Rubber", "Clay"],
+            "answer": "Glass"
+          },
+          {
+            "question": "What does a fan do?",
+            "options": ["Produce heat", "Produce cold", "Blow air", "Make sound"],
+            "answer": "Blow air"
+          },
+          {
+            "question": "Which of these is a measuring tool?",
+            "options": ["Compass", "Screwdriver", "Ruler", "Chisel"],
+            "answer": "Ruler"
+          },
+          {
+            "question": "What do we use to cut wood?",
+            "options": ["File", "Saw", "Screw", "Spanner"],
+            "answer": "Saw"
+          },
+          {
+            "question": "Which of these is used in drawing?",
+            "options": ["Trowel", "Drawing board", "Hammer", "Drill"],
+            "answer": "Drawing board"
+          },
+          {
+            "question": "What is the function of an electric bulb?",
+            "options": ["To give light", "To cook", "To clean", "To drive nails"],
+            "answer": "To give light"
+          },
+          {
+            "question": "What is a wheel used for?",
+            "options": ["Cooking", "Rolling", "Writing", "Cutting"],
+            "answer": "Rolling"
+          },
+          {
+            "question": "Which one is a simple machine?",
+            "options": ["Motor", "Lever", "Fan", "Car"],
+            "answer": "Lever"
+          },
+          {
+            "question": "What is used to join metal parts together?",
+            "options": ["Glue", "Wire", "Nail", "Welding"],
+            "answer": "Welding"
+          }
+        ]
+      },
+      {
+        "subject": "Computer",
+        "questions": [
+          {
+            "question": "What is the brain of the computer?",
+            "options": ["Monitor", "CPU", "Mouse", "Keyboard"],
+            "answer": "CPU"
+          },
+          {
+            "question": "Which device shows the output?",
+            "options": ["Mouse", "Keyboard", "Monitor", "Scanner"],
+            "answer": "Monitor"
+          },
+          {
+            "question": "Which of these is used to type?",
+            "options": ["CPU", "Monitor", "Keyboard", "Speaker"],
+            "answer": "Keyboard"
+          },
+          {
+            "question": "Which device helps to print documents?",
+            "options": ["Scanner", "Printer", "Mouse", "Speaker"],
+            "answer": "Printer"
+          },
+          {
+            "question": "What part of the computer moves the pointer?",
+            "options": ["Mouse", "Keyboard", "Monitor", "CPU"],
+            "answer": "Mouse"
+          },
+          {
+            "question": "Which of these is an input device?",
+            "options": ["Speaker", "Monitor", "Keyboard", "Printer"],
+            "answer": "Keyboard"
+          },
+          {
+            "question": "Which of the following stores information?",
+            "options": ["Monitor", "Hard drive", "Speaker", "Fan"],
+            "answer": "Hard drive"
+          },
+          {
+            "question": "Which one is a type of software?",
+            "options": ["Monitor", "Windows", "Mouse", "Printer"],
+            "answer": "Windows"
+          },
+          {
+            "question": "What is used to hear sound from the computer?",
+            "options": ["Scanner", "Speaker", "Mouse", "Printer"],
+            "answer": "Speaker"
+          },
+          {
+            "question": "Which of these is not a computer part?",
+            "options": ["Keyboard", "CPU", "Radio", "Monitor"],
+            "answer": "Radio"
+          },
+          {
+            "question": "What is the full meaning of CPU?",
+            "options": [
+              "Central Processing Unit",
+              "Control Processing Unit",
+              "Central Print Unit",
+              "Computer Power Unit"
+            ],
+            "answer": "Central Processing Unit"
+          },
+          {
+            "question": "What kind of machine is a computer?",
+            "options": ["Manual", "Electrical", "Mechanical", "Digital"],
+            "answer": "Digital"
+          },
+          {
+            "question": "What does a computer need to work?",
+            "options": ["Fuel", "Electricity", "Water", "Air"],
+            "answer": "Electricity"
+          },
+          {
+            "question": "What is used to save files?",
+            "options": ["Mouse", "Folder", "Paint", "Scanner"],
+            "answer": "Folder"
+          },
+          {
+            "question": "Which device is used to scan documents?",
+            "options": ["Printer", "Scanner", "Monitor", "CPU"],
+            "answer": "Scanner"
+          }
+        ]
+      },
+      {
+        "subject": "Hausa",
+        "questions": [
+          {
+            "question": "Menene ma'anar 'Gida'?",
+            "options": ["Home", "School", "Market", "Farm"],
+            "answer": "Home"
+          },
+          {
+            "question": "Wane daga cikin wadannan kalmomi ne suna?",
+            "options": ["Gudun", "Lafiya", "Da", "A"],
+            "answer": "Lafiya"
+          },
+          {
+            "question": "Menene ma'anar 'Rana'?",
+            "options": ["Night", "Star", "Sun", "Moon"],
+            "answer": "Sun"
+          },
+          {
+            "question": "Menene akwati ke nufi?",
+            "options": ["Pot", "Box", "Cloth", "Broom"],
+            "answer": "Box"
+          },
+          {
+            "question": "Wane ne lafazin gaisuwa?",
+            "options": ["Ina kwana", "Tafiya", "Ruwa", "Daki"],
+            "answer": "Ina kwana"
+          },
+          {
+            "question": "Menene ma'anar 'Karatu'?",
+            "options": ["Eating", "Writing", "Reading", "Sleeping"],
+            "answer": "Reading"
+          },
+          {
+            "question": "Menene 'mace' a Hausa?",
+            "options": ["Man", "Boy", "Girl", "Woman"],
+            "answer": "Woman"
+          },
+          {
+            "question": "Me ake kira 'table' da Hausa?",
+            "options": ["Tebur", "Kujera", "Gado", "Kofa"],
+            "answer": "Tebur"
+          },
+          {
+            "question": "Wanne daga cikin wadannan ba suna bane?",
+            "options": ["Kasa", "Gudu", "Kogi", "Dutse"],
+            "answer": "Gudu"
+          },
+          {
+            "question": "Menene ma'anar 'Abinci'?",
+            "options": ["Drink", "Water", "Food", "Fruit"],
+            "answer": "Food"
+          },
+          {
+            "question": "Wane ne gajeren lokaci a rana?",
+            "options": ["Yamma", "Asuba", "Tsakar Rana", "Dare"],
+            "answer": "Tsakar Rana"
+          },
+          {
+            "question": "Menene 'zuma' ke nufi?",
+            "options": ["Milk", "Juice", "Honey", "Soup"],
+            "answer": "Honey"
+          },
+          {
+            "question": "Wane ne dabba mai shanu?",
+            "options": ["Kaji", "Akuya", "Shanu", "Kare"],
+            "answer": "Shanu"
+          },
+          {
+            "question": "Wace ce hanya mafi kyau na gaisuwa da dattijo?",
+            "options": ["Ina kwana", "Sannu", "Ina gida", "Barka da yamma"],
+            "answer": "Ina kwana"
+          },
+          {
+            "question": "Menene 'akwatin gidan waya'?",
+            "options": ["Mailbox", "Letter", "Phone", "Box"],
+            "answer": "Mailbox"
+          }
+        ]
+      }
+    ]

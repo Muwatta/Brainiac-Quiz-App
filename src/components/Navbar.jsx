@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa';
 
@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="bg-[#00246B] dark:bg-blue-900 p-4 text-white shadow-md"
+      className="bg-[#00246B] dark:bg-blue-900 p-4 text-white shadow-md font-serif"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -27,12 +27,12 @@ const Navbar = () => {
       <div className="container mx-auto relative flex items-center justify-between">
         {/* Logo */}
         <motion.h1
-          className="text-2xl font-bold"
+          className="text-2xl font-bold font-cursive"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <Link to="/" className="hover:text-gray-700">
+          <Link to="/" className="hover:text-gray-300 transition-colors duration-300">
             Brainiac
           </Link>
         </motion.h1>
@@ -40,47 +40,46 @@ const Navbar = () => {
         {/* Right Section: Dark Mode Toggle, Navigation Links, and Hamburger Menu */}
         <div className="flex items-center space-x-6">
           {/* Navigation Links for Larger Screens */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6 font-tesla">
             <Link
               to="/quiz"
-              className="text-lg text-white hover:text-gray-700 transition-colors duration-300"
+              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
             >
               Quiz
             </Link>
             <Link
               to="/leaderboard"
-              className="text-lg text-white hover:text-gray-700 transition-colors duration-300"
+              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
             >
               Leaderboard
             </Link>
-            
             <Link
               to="/contact"
-              className="text-lg text-white hover:text-gray-700 transition-colors duration-300"
+              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
             >
               Contact
             </Link>
             <Link
               to="/community"
-              className="text-lg text-white hover:text-gray-300 transition-colors duration-300"
+              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
             >
               Community
             </Link>
             <Link
               to="/rewards"
-              className="text-lg text-white hover:text-gray-300"
+              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
             >
               Rewards
             </Link>
             <Link
               to="/multiplayer"
-              className="text-lg text-white hover:text-gray-300"
+              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
             >
               Multiplayer
             </Link>
             <Link
               to="/about"
-              className="text-lg text-white hover:text-gray-700 transition-colors duration-300"
+              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
             >
               About
             </Link>
@@ -88,7 +87,7 @@ const Navbar = () => {
 
           {/* Dark Mode Toggle */}
           <button
-            className="bg-white text-blue-500 p-2 rounded-full shadow-md hover:bg-gray-200"
+            className="bg-white text-blue-500 p-2 rounded-full shadow-md hover:bg-gray-200 active:scale-95 transition-transform duration-300"
             onClick={handleDarkModeToggle}
           >
             {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
@@ -96,14 +95,10 @@ const Navbar = () => {
 
           {/* Hamburger Menu for Mobile */}
           <button
-            className="md:hidden text-white z-50"
+            className="md:hidden text-white z-50 hover:text-blue-400 active:scale-95 transition-transform duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? (
-              <FaTimes className="h-6 w-6" />
-            ) : (
-              <FaBars className="h-6 w-6" />
-            )}
+            {isMenuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
           </button>
         </div>
       </div>
@@ -111,12 +106,12 @@ const Navbar = () => {
       {/* Mobile Sidebar Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 flex">
-          <div className="w-64 bg-blue-500 dark:bg-blue-700 p-6">
+          <div className="w-64 bg-blue-500 dark:bg-blue-700 p-6 font-tesla">
             <ul className="space-y-4">
               <li>
                 <Link
                   to="/quiz"
-                  className="block text-lg text-white hover:text-gray-700 transition-colors duration-300"
+                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Quiz
@@ -125,17 +120,16 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/leaderboard"
-                  className="block text-lg text-white hover:text-gray-700 transition-colors duration-300"
+                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Leaderboard
                 </Link>
               </li>
-             
               <li>
                 <Link
                   to="/contact"
-                  className="block text-lg text-white hover:text-gray-700 transition-colors duration-300"
+                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contact
@@ -144,7 +138,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/community"
-                  className="block text-lg text-white hover:text-gray-300 transition-colors duration-300"
+                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Community
@@ -153,7 +147,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/rewards"
-                  className="block text-lg text-white hover:text-gray-300"
+                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Rewards
@@ -162,7 +156,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/multiplayer"
-                  className="block text-lg text-white hover:text-gray-300"
+                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Multiplayer
@@ -171,7 +165,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/about"
-                  className="block text-lg text-white hover:text-gray-700 transition-colors duration-300"
+                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   About
@@ -188,6 +182,5 @@ const Navbar = () => {
     </motion.nav>
   );
 };
-
 
 export default Navbar;

@@ -75,15 +75,24 @@ const Leaderboard = ({ refreshTrigger }) => {
             Top 3 Winners
           </h2>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           {scores.slice(0, 3).map((player, index) => (
             <motion.div
               key={player.id}
-              className={`p-4 border rounded-lg shadow-md flex flex-col items-center ${index === 0 ? 'bg-yellow-400' : index === 1 ? 'bg-gray-400' : 'bg-orange-400'}`}
+              className={`p-4 border rounded-lg shadow-md flex flex-col items-center ${
+                index === 0
+                  ? 'bg-yellow-400'
+                  : index === 1
+                  ? 'bg-gray-400'
+                  : index === 2
+                  ? 'bg-orange-400'
+                  : 'bg-[#001e3bfa]'
+              }`}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
+              {/* Card Content */}
               <img
                 src={player.avatar || 'https://via.placeholder.com/100'}
                 alt={`${player.name || 'Player'}'s avatar`}
@@ -148,25 +157,42 @@ const Leaderboard = ({ refreshTrigger }) => {
         >
           <h2 className="text-2xl font-bold text-center text-[#00ffff]">All Players</h2>
         </motion.div>
-        <div className="space-y-4">
-          {scores.slice(3).map((player) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          {scores.map((player, index) => (
             <motion.div
               key={player.id}
-              className="p-4 border rounded-lg shadow-md flex justify-between items-center"
+              className={`p-4 border rounded-lg shadow-md flex flex-col items-center ${
+                index < 3
+                  ? 'hidden' // Hide the top 3 players in this section
+                  : 'bg-[#001e3bfa]'
+              }`}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div>
-                <h3 className="font-semibold text-[#a9d1d6]">{player.name}</h3>
-                <p className="text-[#c5c7d0]">{player.school}</p>
-              </div>
-              <p className="font-semibold text-[#a9d1d6]">{player.score}</p>
+              {/* Player Avatar */}
+              <img
+                src={player.avatar || 'https://via.placeholder.com/100'}
+                alt={`${player.name || 'Player'}'s avatar`}
+                className="w-16 h-16 rounded-full mb-2 shadow-lg border-2 border-white"
+              />
+
+              {/* Player Name */}
+              <h3 className="text-lg font-semibold text-[#a9d1d6]">{player.name}</h3>
+
+              {/* Player School */}
+              <p className="text-sm text-[#c5c7d0]">{player.school}</p>
+
+              {/* Player Score */}
+              <p className="text-lg font-bold text-[#a9d1d6]">{player.score} Points</p>
 
               {/* Action Icons */}
-              <div className="flex items-center">
+              <div className="mt-4 flex justify-center items-center space-x-4">
+                {/* Like Button */}
                 <motion.button
-                  className={`mr-4 p-2 rounded-full transition-all duration-300 ${player.liked ? 'text-blue-500' : 'text-silver-300'}`}
+                  className={`p-2 rounded-full transition-all duration-300 ${
+                    player.liked ? 'text-blue-500' : 'text-silver-300'
+                  }`}
                   onClick={() => handleLikeToggle(player.id, player.liked)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -174,6 +200,7 @@ const Leaderboard = ({ refreshTrigger }) => {
                   <FaThumbsUp size={24} />
                 </motion.button>
 
+                {/* Share Button */}
                 <motion.button
                   className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300"
                   onClick={() => handleShare(player.name)}
@@ -183,6 +210,7 @@ const Leaderboard = ({ refreshTrigger }) => {
                   <FaShareAlt size={24} />
                 </motion.button>
 
+                {/* Love Button */}
                 <motion.button
                   className="p-2 rounded-full transition-all duration-300 text-red-500"
                   onClick={() => alert('Love feature coming soon!')}

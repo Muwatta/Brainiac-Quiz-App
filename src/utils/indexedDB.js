@@ -50,13 +50,13 @@ export const getTopResults = async () => {
   return new Promise((resolve, reject) => {
     const request = store.getAll();
     request.onsuccess = () => {
-      const results = request.result || []; // Handle empty data
+      const results = request.result || []; 
       resolve(
         results.sort((a, b) => b.score - a.score || a.timeUsed - b.timeUsed)
       );
     };
     request.onerror = event => {
-      resolve([]); // Return an empty array on error
+      resolve([]); 
     };
   });
 };

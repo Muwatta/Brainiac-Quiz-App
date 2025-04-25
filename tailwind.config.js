@@ -1,8 +1,13 @@
 module.exports = {
-  darkMode: 'class', 
-  content: ['./src/**/*.{js,jsx,ts,tsx}'], 
+  darkMode: 'class',
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        cursive: ['"Comic Sans MS"', 'cursive'], // Example cursive font
+        serif: ['Georgia', 'serif'], // Example serif font
+        tesla: ['"Tesla"', 'sans-serif'], // Custom Tesla font
+      },
       colors: {
         'deep-navy': '#001428',
         'dark-blue': '#001e3b',

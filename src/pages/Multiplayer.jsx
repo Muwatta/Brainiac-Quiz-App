@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:4000', {
+/* const socket = io('http://localhost:4000', {
   transports: ['websocket'],
 });
-
+ */
 const Multiplayer = () => {
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [feedbackMessage, setFeedbackMessage] = useState(''); // Add feedback message state
 
   const joinRoom = () => {
     if (room.trim() !== '') {
@@ -20,6 +21,8 @@ const Multiplayer = () => {
     if (message.trim() !== '') {
       socket.emit('send_message', { room, message });
       setMessage('');
+    } else {
+      setFeedbackMessage('Message cannot be empty.');
     }
   };
 
@@ -54,6 +57,11 @@ const Multiplayer = () => {
         </button>
       </div>
       <div className="chat-section">
+        {feedbackMessage && (
+          <div className="mb-4 text-center text-sm text-red-500">
+            {feedbackMessage}
+          </div>
+        )}
         <div className="messages mb-4 p-4 bg-white text-black rounded-lg">
           {messages.map((msg, index) => (
             <p key={index}>{msg}</p>
