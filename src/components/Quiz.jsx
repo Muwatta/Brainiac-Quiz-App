@@ -158,7 +158,7 @@ const Quiz = () => {
         store.put({ id: playerKey, points: updatedPoints });
       }
 
-      setTimeout(() => navigate('/leaderboard'), 2000);
+      setTimeout(() => navigate('/leaderboard'), 10000);
     } catch (err) {
       setMessage('Submission failed. Try again.');
       setFeedbackMessage('Submission failed. Please try again.');

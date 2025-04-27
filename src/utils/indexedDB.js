@@ -61,17 +61,15 @@ export const getTopResults = async () => {
   });
 };
 
-// ✅ NEW: Save entire array of scores (for updates like likes)
 export const saveAllResults = async (results) => {
   const db = await openDatabase();
   const transaction = db.transaction('leaderboard', 'readwrite');
   const store = transaction.objectStore('leaderboard');
 
-  // Clear the store first
   store.clear();
 
-  // Add each updated result
   results.forEach(res => {
     store.add(res);
   });
 };
+

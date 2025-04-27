@@ -6,7 +6,7 @@ module.exports = {
       fontFamily: {
         cursive: ['"Comic Sans MS"', 'cursive'], // Example cursive font
         serif: ['Georgia', 'serif'], // Example serif font
-        tesla: ['"Tesla"', 'sans-serif'], // Custom Tesla font
+        tesla: ['sans-serif'], // Custom serif font
       },
       colors: {
         'deep-navy': '#001428',

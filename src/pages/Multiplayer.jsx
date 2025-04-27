@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-/* const socket = io('http://localhost:4000', {
+ const socket = io('http://localhost:4000', {
   transports: ['websocket'],
 });
- */
+ 
 const Multiplayer = () => {
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [feedbackMessage, setFeedbackMessage] = useState(''); // Add feedback message state
+  const [feedbackMessage, setFeedbackMessage] = useState(''); 
 
   const joinRoom = () => {
     if (room.trim() !== '') {

@@ -1,134 +1,188 @@
 import React, { useState, useEffect } from 'react';
 import { openDatabase } from '../utils/indexedDB';
-import { FaStar } from 'react-icons/fa'; // Import a favicon for credit updates
+import { generatePlayerID } from '../utils/idGenerator'; // Import the ID generator
+import { FaStar } from 'react-icons/fa'; // Favicon for credits
 
 const Rewards = () => {
-  const [points, setPoints] = useState(0); // Initialize points
-  const [credits, setCredits] = useState(0); // Initialize credits
-  const [rewards, setRewards] = useState([
-    { id: 1, name: 'Certificate', cost: 200 },
-    { id: 2, name: 'Badge', cost: 50 },
-    { id: 3, name: 'Unlockable Content', cost: 70 },
-  ]);
-  const [feedbackMessage, setFeedbackMessage] = useState(''); // Add feedback message state
+  const [eligiblePlayers, setEligiblePlayers] = useState([]); // Players eligible for rewards
+  const [feedbackMessage, setFeedbackMessage] = useState(''); // Feedback message
 
-  // Fetch points and credits for the current player from IndexedDB
+  // Fetch eligible players from the leaderboard
   useEffect(() => {
-    const fetchPlayerData = async () => {
-      const playerName = localStorage.getItem('currentPlayerName'); // Get the current player's name
-      if (playerName) {
-        const db = await openDatabase();
-        const transaction = db.transaction('leaderboard', 'readonly');
-        const store = transaction.objectStore('leaderboard');
+    const fetchEligiblePlayers = async () => {
+      const db = await openDatabase();
+      const transaction = db.transaction('leaderboard', 'readonly');
+      const store = transaction.objectStore('leaderboard');
 
-        const playerData = await new Promise((resolve, reject) => {
-          const request = store.get(playerName);
-          request.onsuccess = () => resolve(request.result || { points: 0, credits: 0 });
-          request.onerror = () => resolve({ points: 0, credits: 0 });
-        });
+      const allPlayers = await new Promise((resolve, reject) => {
+        const request = store.getAll();
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => resolve([]);
+      });
 
-        setPoints(playerData.points);
-        setCredits(playerData.credits || 0); // Default to 0 if credits are not set
-      }
+      // Assign IDs to players without IDs
+      const playersWithIDs = allPlayers.map((player) => {
+        if (!player.id) {
+          player.id = generatePlayerID(); // Generate a new ID if missing
+        }
+        return player;
+      });
+
+      // Save players with new IDs back to IndexedDB
+      const writeTransaction = db.transaction('leaderboard', 'readwrite');
+      const writeStore = writeTransaction.objectStore('leaderboard');
+      playersWithIDs.forEach((player) => writeStore.put(player));
+
+      // Aggregate players by ID and sum their points and credits
+      const aggregatedPlayers = playersWithIDs.reduce((acc, player) => {
+        if (!acc[player.id]) {
+          acc[player.id] = { ...player };
+        } else {
+          acc[player.id].points += player.points;
+          acc[player.id].credits += player.credits;
+        }
+        return acc;
+      }, {});
+
+      // Filter players with more than 10 points
+      const eligible = Object.values(aggregatedPlayers).filter(
+        (player) => player.points > 10
+      );
+
+      setEligiblePlayers(eligible);
     };
 
-    fetchPlayerData();
+    fetchEligiblePlayers();
   }, []);
 
-  const handleRedeem = async (reward) => {
-    if (points >= reward.cost) {
-      const updatedPoints = points - reward.cost;
-      setPoints(updatedPoints);
+  // Handle claiming rewards
+  const handleClaimReward = async (playerID) => {
+    const db = await openDatabase();
+    const transaction = db.transaction('leaderboard', 'readwrite');
+    const store = transaction.objectStore('leaderboard');
 
-      const playerName = localStorage.getItem('currentPlayerName'); // Get the current player's name
-      if (playerName) {
-        const db = await openDatabase();
-        const transaction = db.transaction('leaderboard', 'readwrite');
-        const store = transaction.objectStore('leaderboard');
+    const player = eligiblePlayers.find((p) => p.id === playerID);
+    if (player) {
+      // Deduct all credits
+      const updatedPlayer = { ...player, credits: 0 };
+      store.put(updatedPlayer);
 
-        store.put({ id: playerName, points: updatedPoints, credits }); // Update points in IndexedDB
-      }
-
-      setFeedbackMessage(`You have redeemed: ${reward.name}`);
-    } else {
-      setFeedbackMessage('Not enough points to redeem this reward.');
-    }
-  };
-
-  // Handle leaderboard card click
-  const handleLeaderboardClick = async () => {
-    if (points >= 10) {
-      const updatedCredits = credits + 5; // Add 5 credits
-      setCredits(updatedCredits);
-
-      const playerName = localStorage.getItem('currentPlayerName'); // Get the current player's name
-      if (playerName) {
-        const db = await openDatabase();
-        const transaction = db.transaction('leaderboard', 'readwrite');
-        const store = transaction.objectStore('leaderboard');
-
-        // Update credits in IndexedDB
-        store.put({ id: playerName, points, credits: updatedCredits });
-      }
-
-      setFeedbackMessage('🎉 You earned 5 credits for surpassing 10 points!');
-    } else {
-      setFeedbackMessage('You need at least 10 points to earn credits.');
+      // Update the UI
+      setEligiblePlayers((prev) =>
+        prev.map((p) =>
+          p.id === playerID ? { ...p, credits: 0 } : p
+        )
+      );
+      setFeedbackMessage(`🎉 Player ${playerID} has claimed their rewards!`);
     }
   };
 
   return (
     <div className="rewards-container p-6 bg-gradient-to-b from-[#2963A2] to-[#72C2C9] min-h-screen text-white">
       <h1 className="text-3xl font-bold mb-6 text-center">Rewards</h1>
-      <p className="text-center mb-4">Your Points: {points}</p>
-      <p className="text-center mb-4">Your Credits: {credits}</p>
       {feedbackMessage && (
-        <div className="mb-4 text-center text-sm text-red-500">
+        <div className="mb-4 text-center text-sm text-green-500">
           {feedbackMessage}
         </div>
       )}
 
-      {/* Leaderboard Card */}
-      <div
-        onClick={handleLeaderboardClick}
-        className="leaderboard-card p-4 bg-white text-black rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
-      >
-        <h3 className="text-lg font-bold">Leaderboard</h3>
-        <p>Click to earn credits if you have 10 or more points!</p>
-        <FaStar className="text-yellow-500 text-2xl mt-2 animate-bounce" /> {/* Animated Favicon */}
+      {/* Reward Targets */}
+      <div className="reward-targets mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="target-item p-4 bg-white text-black rounded-lg shadow-md text-center">
+            <p className="text-lg font-bold">🎖️ Badge</p>
+            <p className="text-sm text-gray-600">50 Points</p>
+          </div>
+          <div className="target-item p-4 bg-white text-black rounded-lg shadow-md text-center">
+            <p className="text-lg font-bold">📜 Certificate</p>
+            <p className="text-sm text-gray-600">200 Points</p>
+          </div>
+          <div className="target-item p-4 bg-white text-black rounded-lg shadow-md text-center">
+            <p className="text-lg font-bold">🎓 Tuition Fee</p>
+            <p className="text-sm text-gray-600">500 Points</p>
+          </div>
+        </div>
       </div>
 
-      {/* Display Badge and Certificate */}
-      <div className="mb-6 text-center">
-        {points >= 50 && (
-          <div className="mb-4">
-            <p className="text-lg font-bold text-yellow-400">🎖️ You have earned a Badge!</p>
-          </div>
-        )}
-        {points >= 200 && (
-          <div className="mb-4">
-            <p className="text-lg font-bold text-green-400">📜 You have earned a Certificate!</p>
-          </div>
-        )}
-      </div>
-
-      {/* Rewards List */}
+      {/* Eligible Players List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {rewards.map((reward) => (
-          <div
-            key={reward.id}
-            className="reward-item p-4 bg-white text-black rounded-lg shadow-md"
-          >
-            <h3 className="text-lg font-bold">{reward.name}</h3>
-            <p>Cost: {reward.cost} points</p>
-            <button
-              onClick={() => handleRedeem(reward)}
-              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        {eligiblePlayers.map((player) => {
+          const badgeProgress = Math.min((player.points / 50) * 100, 100); // Progress toward badge
+          const certificateProgress = Math.min((player.points / 200) * 100, 100); // Progress toward certificate
+          const tuitionProgress = Math.min((player.points / 500) * 100, 100); // Progress toward free tuition
+
+          return (
+            <div
+              key={player.id}
+              className="reward-item p-4 bg-white text-black rounded-lg shadow-md"
             >
-              Redeem
-            </button>
-          </div>
-        ))}
+              <h3 className="text-lg font-bold text-center">{player.id}</h3>
+              <p className="text-center text-sm text-gray-600">
+                Points: {player.points}
+              </p>
+              <p className="text-center text-sm text-gray-600 flex items-center justify-center">
+                Credits: {player.credits} <FaStar className="text-yellow-400 ml-1" />
+              </p>
+
+              {/* Progress Toward Badge */}
+              <div className="mt-4">
+                <p className="text-sm text-gray-600">🎖️ Badge (50 Points)</p>
+                <div className="relative w-full h-4 bg-gray-200 rounded-full">
+                  <div
+                    className="absolute top-0 left-0 h-4 bg-blue-500 rounded-full"
+                    style={{ width: `${badgeProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-sm text-gray-600 mt-1">
+                  {badgeProgress === 100
+                    ? 'Achieved!'
+                    : `${player.points} / 50 Points`}
+                </p>
+              </div>
+
+              {/* Progress Toward Certificate */}
+              <div className="mt-4">
+                <p className="text-sm text-gray-600">📜 Certificate (200 Points)</p>
+                <div className="relative w-full h-4 bg-gray-200 rounded-full">
+                  <div
+                    className="absolute top-0 left-0 h-4 bg-green-500 rounded-full"
+                    style={{ width: `${certificateProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-sm text-gray-600 mt-1">
+                  {certificateProgress === 100
+                    ? 'Achieved!'
+                    : `${player.points} / 200 Points`}
+                </p>
+              </div>
+
+              {/* Progress Toward Free Tuition */}
+              <div className="mt-4">
+                <p className="text-sm text-gray-600">🎓 Free Tuition (500 Points)</p>
+                <div className="relative w-full h-4 bg-gray-200 rounded-full">
+                  <div
+                    className="absolute top-0 left-0 h-4 bg-yellow-500 rounded-full"
+                    style={{ width: `${tuitionProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-sm text-gray-600 mt-1">
+                  {tuitionProgress === 100
+                    ? 'Achieved!'
+                    : `${player.points} / 500 Points`}
+                </p>
+              </div>
+
+              {/* Claim Reward Button */}
+              <button
+                onClick={() => handleClaimReward(player.id)}
+                className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                disabled={player.credits === 0}
+              >
+                {player.credits === 0 ? 'Already Claimed' : 'Claim Reward'}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

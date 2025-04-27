@@ -9,10 +9,10 @@ const Leaderboard = ({ refreshTrigger }) => {
 
   // Function to calculate the number of stars based on the score
   const calculateStars = (score) => {
-    if (score >= 90) return 5;
-    if (score >= 80) return 4;
-    if (score >= 70) return 3;
-    if (score >= 60) return 2;
+    if (score >= 20) return 5;
+    if (score >= 15) return 4;
+    if (score >= 10) return 3;
+    if (score >= 5) return 2;
     return 1;
   };
 

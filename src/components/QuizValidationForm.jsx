@@ -14,15 +14,13 @@ const QuizValidationForm = ({ onSubmit }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showRestartModal, setShowRestartModal] = useState(false);
   const [newSubject, setNewSubject] = useState('');
-  const [subjects, setSubjects] = useState([]); // State for subjects dropdown
-
-  // Check for existing user details in localStorage on component mount
+  const [subjects, setSubjects] = useState([]); 
   useEffect(() => {
     const savedUser = localStorage.getItem('quizUser');
     if (savedUser) {
       const userData = JSON.parse(savedUser);
       setFormData(userData);
-      setIsLoggedIn(true); // User is already logged in
+      setIsLoggedIn(true); 
     }
   }, []);
 
@@ -30,7 +28,6 @@ const QuizValidationForm = ({ onSubmit }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Update subjects based on selected class
     if (name === 'class') {
       if (value.startsWith('JSS')) {
         setSubjects([
@@ -74,14 +71,13 @@ const QuizValidationForm = ({ onSubmit }) => {
       return;
     }
 
-    // Save user details to localStorage
     localStorage.setItem('quizUser', JSON.stringify(formData));
-    setIsLoggedIn(true); // Mark user as logged in
-    onSubmit(formData); // Pass the data to the parent component
+    setIsLoggedIn(true); 
+    onSubmit(formData); 
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem('quizUser'); // Clear user details from localStorage
+    localStorage.removeItem('quizUser'); 
     setFormData({
       name: '',
       school: '',
@@ -89,15 +85,15 @@ const QuizValidationForm = ({ onSubmit }) => {
       subject: '',
       profilePicture: null,
     });
-    setIsLoggedIn(false); // Mark user as logged out
+    setIsLoggedIn(false); 
   };
 
   const handleRestartQuiz = () => {
-    setShowRestartModal(true); // Show the restart confirmation modal
+    setShowRestartModal(true);
   };
 
   const handleRestartWithSameSubject = () => {
-    setShowRestartModal(false); // Close the modal
+    setShowRestartModal(false); 
     onSubmit(formData); // Retake the quiz with the same subject
   };
 
