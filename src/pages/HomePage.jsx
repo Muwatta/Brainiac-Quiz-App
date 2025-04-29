@@ -27,14 +27,14 @@ const HomePage = () => {
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         <motion.div
-          className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white"
+          className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white px-4"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
         >
           {/* Staggered Word Animation */}
           <motion.div
-            className="flex space-x-2 text-3xl md:text-4xl font-bold mb-4"
+            className="flex flex-wrap justify-center space-x-2 text-2xl md:text-4xl font-bold mb-4"
             initial="hidden"
             animate="visible"
             variants={{
@@ -63,7 +63,7 @@ const HomePage = () => {
           </motion.div>
 
           <motion.p
-            className="text-md md:text-lg"
+            className="text-sm md:text-lg text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.8, ease: 'easeOut' }}
