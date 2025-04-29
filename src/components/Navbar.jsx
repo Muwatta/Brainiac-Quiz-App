@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Use NavLink instead of Link
 import { motion } from 'framer-motion';
 import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa';
 
@@ -32,57 +32,85 @@ const Navbar = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <Link to="/" className="hover:text-gray-300 transition-colors duration-300">
+          <NavLink to="/" className="hover:text-gray-300 transition-colors duration-300">
             Brainiac
-          </Link>
+          </NavLink>
         </motion.h1>
 
         {/* Right Section: Dark Mode Toggle, Navigation Links, and Hamburger Menu */}
         <div className="flex items-center space-x-6">
           {/* Navigation Links for Larger Screens */}
           <div className="hidden md:flex items-center space-x-6 font-tesla">
-            <Link
+            <NavLink
               to="/quiz"
-              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+              className={({ isActive }) =>
+                `text-lg transition-colors duration-300 ${
+                  isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                }`
+              }
             >
               Quiz
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/leaderboard"
-              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+              className={({ isActive }) =>
+                `text-lg transition-colors duration-300 ${
+                  isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                }`
+              }
             >
               Leaderboard
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/contact"
-              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+              className={({ isActive }) =>
+                `text-lg transition-colors duration-300 ${
+                  isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                }`
+              }
             >
               Contact
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/community"
-              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+              className={({ isActive }) =>
+                `text-lg transition-colors duration-300 ${
+                  isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                }`
+              }
             >
               Community
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/rewards"
-              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+              className={({ isActive }) =>
+                `text-lg transition-colors duration-300 ${
+                  isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                }`
+              }
             >
               Rewards
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/multiplayer"
-              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+              className={({ isActive }) =>
+                `text-lg transition-colors duration-300 ${
+                  isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                }`
+              }
             >
               Multiplayer
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/about"
-              className="text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+              className={({ isActive }) =>
+                `text-lg transition-colors duration-300 ${
+                  isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                }`
+              }
             >
               About
-            </Link>
+            </NavLink>
           </div>
 
           {/* Dark Mode Toggle */}
@@ -109,67 +137,95 @@ const Navbar = () => {
           <div className="w-64 bg-blue-500 dark:bg-blue-700 p-6 font-tesla">
             <ul className="space-y-4">
               <li>
-                <Link
+                <NavLink
                   to="/quiz"
-                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `block text-lg transition-colors duration-300 ${
+                      isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                    }`
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Quiz
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/leaderboard"
-                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `block text-lg transition-colors duration-300 ${
+                      isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                    }`
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Leaderboard
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/contact"
-                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `block text-lg transition-colors duration-300 ${
+                      isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                    }`
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contact
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/community"
-                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `block text-lg transition-colors duration-300 ${
+                      isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                    }`
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Community
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/rewards"
-                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `block text-lg transition-colors duration-300 ${
+                      isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                    }`
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Rewards
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/multiplayer"
-                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `block text-lg transition-colors duration-300 ${
+                      isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                    }`
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Multiplayer
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/about"
-                  className="block text-lg text-white hover:text-blue-400 active:text-blue-500 transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `block text-lg transition-colors duration-300 ${
+                      isActive ? 'text-blue-400 font-bold' : 'text-white hover:text-blue-400'
+                    }`
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 >
                   About
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>

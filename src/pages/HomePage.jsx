@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaBrain } from 'react-icons/fa';
+import heroImage from '../assets/hero-image.jpg'; // Local image
 
 const HomePage = () => {
   const robots = [
@@ -20,37 +21,60 @@ const HomePage = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
+      {/* Hero Banner Section */}
       <motion.div
-        className="flex justify-center items-center mb-6"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="relative w-full max-w-[1200px] h-[200px] md:h-[300px] mx-auto bg-cover bg-center rounded-lg mb-10"
+        style={{ backgroundImage: `url(${heroImage})` }}
       >
-        {/* Icon */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
         >
-          <FaBrain className="text-[#9FA65A] text-4xl mr-3" /> {/* Brain Icon */}
-        </motion.div>
+          {/* Staggered Word Animation */}
+          <motion.div
+            className="flex space-x-2 text-3xl md:text-4xl font-bold mb-4"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.3, // Delay between each word
+                },
+              },
+            }}
+          >
+            {['Welcome', 'to', 'Brainiac', 'Quiz'].map((word, index) => (
+              <motion.span
+                key={index}
+                className="inline-block"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.div>
 
-        {/* Heading */}
-        <motion.h1
-          className="text-3xl font-bold text-white"
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{
-            duration: 0.6,
-            ease: 'easeOut',
-          }}
-        >
-          Welcome to the Brainiac-Quiz App
-        </motion.h1>
+          <motion.p
+            className="text-md md:text-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.8, ease: 'easeOut' }}
+          >
+            Challenge your mind and test your knowledge!
+          </motion.p>
+        </motion.div>
       </motion.div>
 
       <motion.p
-        className="text-lg mt-4 text-[#9FA65A]"
+        className="text-lg mt-4 text-[#e1e4cd]"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{

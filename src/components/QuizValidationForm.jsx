@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaUser } from 'react-icons/fa';
+import { generatePlayerID } from '../utils/idGenerator';
+import { openDatabase } from '../utils/indexedDB';
 
 const QuizValidationForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -64,12 +66,36 @@ const QuizValidationForm = ({ onSubmit }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const registerPlayer = async (formData) => {
+    const db = await openDatabase();
+    const transaction = db.transaction('leaderboard', 'readwrite');
+    const store = transaction.objectStore('leaderboard');
+
+    const playerID = generatePlayerID(); // Generate unique ID
+    const newPlayer = {
+      id: playerID,
+      name: formData.name,
+      school: formData.school,
+      class: formData.class,
+      subject: formData.subject,
+      credits: 0,
+      points: 0,
+    };
+
+    await store.add(newPlayer);
+    console.log(`Player registered with ID: ${playerID}`);
+    return playerID; // Return the ID to the player
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.school || !formData.class || !formData.subject) {
-      alert('All fields except the profile picture are required!');
+      alert('All fields are required!');
       return;
     }
+
+    const playerID = await registerPlayer(formData);
+    alert(`Registration successful! Your Player ID is: ${playerID}. Please keep it safe.`);
 
     localStorage.setItem('quizUser', JSON.stringify(formData));
     setIsLoggedIn(true); 
@@ -164,7 +190,7 @@ const QuizValidationForm = ({ onSubmit }) => {
         {/* Restart Confirmation Modal */}
         {showRestartModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <div className="bg-white p-2 rounded-md m-10 shadow-lg text-center">
               <h3 className="text-lg font-bold mb-4">Restart Quiz</h3>
               <p className="mb-4">
                 Do you want to retake the quiz with the same subject ({formData.subject})?
